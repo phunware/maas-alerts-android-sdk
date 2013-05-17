@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AlertsSample</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="refresh">Refresh</string>
+    <string name="clear">Clear</string>
+    <string name="update">Update</string>
+    <string name="email">Email</string>
+    <string name="register">Register Push</string>
+    <string name="unregister">Unregister Push</string>
+    
+    <string name="title_info">Info</string>
+    <string name="title_subscriptions">Subscriptions</string>
+    <string name="title_console">Console</string>
+    
+    <string name="menu_info">@string/title_info</string>
+    <string name="menu_subscriptions">@string/title_subscriptions</string>
+    <string name="menu_console">@string/title_console</string>
+    
+   	<string name="maas_applicationid">MaaS Application Key</string>
+   	<string name="device_token">Device GCM Token</string>
+   	<string name="device_id">Device ID</string>
+   	
+   	<string name="loading">Loading&#8230;</string>
+   	<string name="no_subscriptions">This device isn\'t registered for any subscriptions.</string>
+</resources>
