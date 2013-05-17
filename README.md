@@ -29,7 +29,7 @@ passed back in this call. It is up to the developer to update and persist the sa
 ##How do I send an updated list of subscription preferences to the server?
 Using the `saveSubscriptions()` method the subscription state can be saved on the server.
 `PwAlertsSubscription.saveSubscriptions(Context context, List<Subscription> subscriptions)`
-This will use the isSubscribed flag in each of the models in the list.
+This will use the `isSubscribed` flag in each of the models in the list.
 When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
 a call is made to the backend in order to reset all the subscriptions to an unsubscribed state.
 
@@ -42,25 +42,25 @@ Update the `AndroidManifest.xml` with to include the following permissions:
 ``` XML
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-   <!-- GCM requires a Google account. -->
-   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-   <!-- Keeps the processor from sleeping when a message is received. -->
-   <uses-permission android:name="android.permission.WAKE_LOCK" />
-   <!--
-     Creates a custom permission so only this app can receive its messages.
-     NOTE: the permission *must* be called PACKAGE.permission.C2D_MESSAGE,
-           where PACKAGE is the application's package name.
-    -->
-   <permission
-       android:name="com.phunware.alerts.sample.permission.C2D_MESSAGE"
-       android:protectionLevel="signature" />
+<!-- GCM requires a Google account. -->
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<!-- Keeps the processor from sleeping when a message is received. -->
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<!--
+    Creates a custom permission so only this app can receive its messages.
+    NOTE: the permission *must* be called PACKAGE.permission.C2D_MESSAGE,
+    where PACKAGE is the application's package name.
+-->
+<permission
+    android:name="com.phunware.alerts.sample.permission.C2D_MESSAGE"
+    android:protectionLevel="signature" />
 
-   <uses-permission android:name="com.phunware.alerts.sample.permission.C2D_MESSAGE" />
-   <!-- This app has permission to register and receive data message. -->
-   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<uses-permission android:name="com.phunware.alerts.sample.permission.C2D_MESSAGE" />
+<!-- This app has permission to register and receive data message. -->
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 ```
 
 ###Step 2: Register Services
@@ -70,17 +70,13 @@ Then register the service in the manifest.
 
 ``` Java
 public class GCMIntentService extends PwAlertsIntentService {
-        private static final String TAG = "GCMIntentService";
-
-        @Override
-        public void onMessageAlertsError(Context context, AlertExtras extras,
-                        Exception e) {
-        }
+    @Override
+    public void onMessageAlertsError(Context context, AlertExtras extras, Exception e) {
+    }
         
-        @Override
-        public void onMessageAlerts(Context context, AlertExtras extras,
-                        JSONObject data) {
-        }
+    @Override
+     public void onMessageAlerts(Context context, AlertExtras extras,JSONObject data) {
+    }
 }
 ```
 
@@ -101,24 +97,24 @@ Be sure to replace the category tag with your own package name.
 
 ``` XML
 <!--
-      BroadcastReceiver that will receive intents from GCM
-      services and handle them to the custom IntentService.
+    BroadcastReceiver that will receive intents from GCM
+    services and handle them to the custom IntentService.
 
-      The com.google.android.c2dm.permission.SEND permission is necessary
-      so only GCM services can send data messages for the app
+    The com.google.android.c2dm.permission.SEND permission is necessary
+    so only GCM services can send data messages for the app
 -->
 <receiver
-   android:name="com.google.android.gcm.GCMBroadcastReceiver"
-   android:permission="com.google.android.c2dm.permission.SEND" >
-   <intent-filter>
+    android:name="com.google.android.gcm.GCMBroadcastReceiver"
+    android:permission="com.google.android.c2dm.permission.SEND" >
+    <intent-filter>
 
-       <!-- Receives the actual messages. -->
-       <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-       <!-- Receives the registration id. -->
-       <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-       <!-- Your Package Name Here -->
-       <category android:name="com.your.package.name.here" />
-   </intent-filter>
+        <!-- Receives the actual messages. -->
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <!-- Receives the registration id. -->
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+        <!-- Your Package Name Here -->
+        <category android:name="com.your.package.name.here" />
+    </intent-filter>
 </receiver>
 ```
 
@@ -129,7 +125,7 @@ the alert and provides convenient get methods for them. For example:
 
 ``` Java
 public void onMessageAlerts(Context context, PwAlertExtras extras, JSONObject data) {
-   String message = extras.getAlertMessage();
+    String message = extras.getAlertMessage();
 }
 ```
 
