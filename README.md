@@ -37,7 +37,8 @@ a call is made to the backend in order to reset all the subscriptions to an unsu
 There are a few steps to follow in order to be able to receive and handle push notifications.
 
 ###Step 1: Update Permissions
-Update the `AndroidManifest.xml` with to include the following permissions:
+Update the `AndroidManifest.xml` with to include the following permissions.
+These go outside of the `application` tag:
 
 ``` XML
 <uses-permission android:name="android.permission.INTERNET" />
@@ -81,6 +82,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 ```
 
 In the manifest the service should be registered with the correct path to the service.
+The `service` should be defined inide of the `application` tag.
 If` GCMIntentService` is in the package root, then follow the below example:
 ``` XML
 <!--
@@ -94,6 +96,7 @@ If` GCMIntentService` is in the package root, then follow the below example:
 Register the GCM Receiver in the manifest.
 This will receive intents from GCM services and then forward them through to the `IntentService` defined above.
 Be sure to replace the category tag with your own package name.
+The `receiver` should be defined inide of the `application` tag.
 
 ``` XML
 <!--
