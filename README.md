@@ -15,8 +15,17 @@ You can manually perform an unregister and register action simply by calling the
 `PwAlertsRegister.unregister(Context context)` or `PwAlertsRegister.register(Context context)`
 These methods should be called asynchronously, or outside of the main UI thread.
 
-##Will I know when my device unregisters or registers?
-Currently no.
+##How do I know when unregister or register operations are finished?
+In your implementation of `GCMIntentService` (See below for implementation details) there are two methods that
+will be called. `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`.
+
+`onRegistered` is called when the device has registerd succesffuly or unsuccessfuly. The first parameter is a flag
+signifying this status. The second parameter will provide an error message or `null` if the operation is 
+successful.
+
+`onUnregistered` is called when the device has registerd succesffuly or unsuccessfuly. The first parameter is a flag
+signifying this status. The second parameter will provide an error message or `null` if the operation is 
+successful.
 
 ##How do I get a list of subscriptions
 To get the list of available subscriptions, call the line
@@ -71,6 +80,15 @@ Then register the service in the manifest.
 
 ``` Java
 public class GCMIntentService extends PwAlertsIntentService {
+
+    @Override
+    public void onRegistered(boolean isSuccessful, String errMessage) {
+	}
+
+	@Override
+	public void onUnregistered(boolean isSuccessful, String errMessage) {
+	}
+    
     @Override
     public void onMessageAlertsError(Context context, AlertExtras extras, Exception e) {
     }
