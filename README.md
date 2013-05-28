@@ -151,3 +151,10 @@ public void onMessageAlerts(Context context, PwAlertExtras extras, JSONObject da
 ```
 
 Here is where the alert can be handled and built into a notification or otherwise.
+
+##Verify Manifest
+`PwAlertsModule` has a convenience method to check if the manifest for the Alerts SDK is setup properlly.
+This should only be used for development and testing, not in production.
+Call the method with the line `PwAlertsModule.validateManifestAlertsSetup(context)`. The passed in context should be the
+application context. If there is an error then an `IllegalStateException` will be thrown with an error message on what
+couldn't be found.
