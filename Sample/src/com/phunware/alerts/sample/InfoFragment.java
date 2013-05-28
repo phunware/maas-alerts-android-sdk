@@ -1,7 +1,9 @@
 package com.phunware.alerts.sample;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,9 +42,13 @@ public class InfoFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+		Log.v(TAG, "onStart");
 		refreshInfo();
 	}
-
+	
+	protected static final String PREFS_ALERTS_REGISTER = "com.phunware.alerts.register";
+	private static final String PREFS_ALERTS_REGISTER_GCM_TOKEN = "com.phunware.alerts.register.gcm_token";
+	
 	public void refreshInfo() {
 		String accessKey = PwCoreSession.getInstance().getAccessKey();
 		((TextView) getView().findViewById(R.id.app_id_value))
@@ -52,6 +58,15 @@ public class InfoFragment extends Fragment {
 				.getDeviceId();
 		((TextView) getView().findViewById(R.id.device_id_value))
 				.setText(deviceId);
+		
+		String sessionId = PwCoreSession.getInstance().getSessionId(getActivity());
+		((TextView)getView().findViewById(R.id.session_id_value)).setText(sessionId);
+		
+		SharedPreferences sp = com.phunware.core.internal.Utils
+				.getSharedPreferences(getActivity(), PREFS_ALERTS_REGISTER);
+		String token = sp
+				.getString(PREFS_ALERTS_REGISTER_GCM_TOKEN, null);
+		((TextView)getView().findViewById(R.id.device_token_value)).setText(token);
 	}
 
 	@Override

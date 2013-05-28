@@ -60,7 +60,7 @@ public class ConsoleOutput implements Serializable{
 		mText += "\n"
 				+ "\n+++++++++++++++++++++++++++++\n"
 				+ timestamp
-				+ "\n+++++\n"
+				+ "\n"
 				+ text
 				+ "\n-----------------------------";
 		return mText;

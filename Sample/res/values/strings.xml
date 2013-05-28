@@ -22,7 +22,11 @@
    	<string name="maas_applicationid">MaaS Application Key</string>
    	<string name="device_token">Device GCM Token</string>
    	<string name="device_id">Device ID</string>
+   	<string name="session_id">Session ID</string>
+   	<string name="device_token">Device Token</string>
    	
    	<string name="loading">Loading&#8230;</string>
    	<string name="no_subscriptions">This device isn\'t registered for any subscriptions.</string>
+   	
+   	<string name="refreshing_after_register">The device has registered for alerts, refreshing info...</string>
 </resources>

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.phunware.alerts.PwAlertsIntentService;
@@ -23,7 +24,7 @@ import com.phunware.alerts.models.PwAlertExtras;
  */
 public class GCMIntentService extends PwAlertsIntentService {
 	private static final String TAG = "GCMIntentService";
-
+	
 	@Override
 	public void onMessageAlertsError(Context context, PwAlertExtras extras,
 			Exception e) {
@@ -41,6 +42,8 @@ public class GCMIntentService extends PwAlertsIntentService {
 	@Override
 	public void onMessageAlerts(Context context, PwAlertExtras extras,
 			JSONObject data) {
+		
+		Log.v("DUONG", "ALERTS SAMPLE: onMessageAlerts()");
 
 		Log.v(TAG, "in onMessageAlerts");
 		Log.i(TAG, "Extras = " + extras.toString());
@@ -95,5 +98,30 @@ public class GCMIntentService extends PwAlertsIntentService {
 				.setContentText(alertsMessage).setContentIntent(intent);
 
 		return notifBuilder;
+	}
+
+	@Override
+	public void onRegistered(boolean isSuccessful, String errMessage) {
+		Log.v(TAG, "in onRegistered: success "+isSuccessful);
+		if(!isSuccessful)
+			Log.e(TAG, errMessage);
+		sendCommonLocalBroadcast(isSuccessful, errMessage, Utils.ACTION_ON_REGISTERED);
+	}
+
+	
+	@Override
+	public void onUnregistered(boolean isSuccessful, String errMessage) {
+		Log.v(TAG, "in onUnregistered: success "+isSuccessful);
+		if(!isSuccessful)
+			Log.e(TAG, errMessage);
+		sendCommonLocalBroadcast(isSuccessful, errMessage, Utils.ACTION_ON_UNREGISTERED);
+	}
+	
+	private void sendCommonLocalBroadcast(boolean isSuccessful, String errMessage, String action)
+	{
+		Intent i = new Intent(action);
+		i.putExtra(Utils.BROADCAST_SUCCESSFUL_KEY, isSuccessful);
+		i.putExtra(Utils.BROADCAST_MESSAGE_KEY, errMessage);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(i);
 	}
 }

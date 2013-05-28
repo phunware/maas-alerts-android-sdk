@@ -18,10 +18,8 @@ public class AlertsApplication extends Application {
 		String encryptionKey = "zxcvbnmasdfghjklqwertyuiop123456";
 		PwLog.setShowLog(true);
 		
-		PwCoreSession.installModules(PwAlertsModule.class);
+		PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance());
 		
-		PwCoreSession.getInstance().registerKeys(getApplicationContext(), accessKey, signatureKey, encryptionKey);
-		
-		PwLog.setShowLog(true);
+		PwCoreSession.getInstance().registerKeys(this, accessKey, signatureKey, encryptionKey);
 	}
 }

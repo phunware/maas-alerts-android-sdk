@@ -16,6 +16,9 @@ public class Utils {
 
 	public static final String BROADCAST_MESSAGE_ACTION = "com.phunware.core.BROADCAST_MESSAGE_ACTION";
 	public static final String BROADCAST_MESSAGE_KEY = "com.phunware.core.BROADCAST_MESSAGE_KEY";
+	public static final String BROADCAST_SUCCESSFUL_KEY = "com.phunware.alerts.BROADCAST_SUCCESSFUL_KEY";
+	public static final String ACTION_ON_REGISTERED = "com.phunware.alerts.sample.ACTION_ON_REGISTERED";
+	public static final String ACTION_ON_UNREGISTERED = "com.phunware.alerts.sample.ACTION_ON_UNREGISTERED";
 
 	public static void email(Context packageContext, String body) {
 		

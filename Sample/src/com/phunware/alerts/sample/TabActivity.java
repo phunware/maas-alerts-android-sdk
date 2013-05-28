@@ -5,16 +5,19 @@ import java.util.HashMap;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 
@@ -79,6 +82,14 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
         
         mConsoleOutput = new ConsoleOutput(savedInstanceState);
         
+        //Start the session here
+    	PwCoreSession.getInstance().activityStartSession(this);
+    	mConsoleOutput.appendToConsole("Is the device registered for alerts? "+PwAlertsRegister.hasRegistered(this));
+        
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Utils.ACTION_ON_REGISTERED);
+        filter.addAction(Utils.ACTION_ON_UNREGISTERED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(localReceiver, filter);
         
         Bundle args = new Bundle();
         initialiseTabHost(args);
@@ -87,14 +98,8 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
         }
         
        // Display Push Message
+        //This will also flush to the console
         handlePushResult(getIntent());
-    }
-    
-    @Override
-    protected void onStart() {
-    	super.onStart();
-    	PwCoreSession.getInstance().activityStartSession(this);
-    	flushToConsole();
     }
     
     @Override
@@ -237,15 +242,33 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 	 * Listen to messages being broadcasted by the alert intent service. This is
 	 * optional, mostly for demonstration.
 	 */
-	public class ResponseRegistrarReceiver extends BroadcastReceiver {
+	private BroadcastReceiver localReceiver = new BroadcastReceiver() {
+		
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			String newMessage = intent.getExtras().getString(
-					Utils.BROADCAST_MESSAGE_KEY);
-			mConsoleOutput.appendToConsole(newMessage);
-			flushToConsole();
+			String action = intent.getAction();
+			if(action.equals(Utils.ACTION_ON_REGISTERED) || action.equals(Utils.ACTION_ON_UNREGISTERED))
+			{
+				String errMessage = intent.getStringExtra(Utils.BROADCAST_MESSAGE_KEY);
+				boolean isSuccessful = intent.getBooleanExtra(Utils.BROADCAST_SUCCESSFUL_KEY, false);
+				String msg = action+"\n"+ (isSuccessful ? "" : "NOT") + " Successful!";
+				if(!isSuccessful)
+					msg += "\n"+ errMessage;
+				mConsoleOutput.appendToConsole(msg);
+				flushToConsole();
+				
+				//refresh info fragment
+				InfoFragment frag = (InfoFragment) getSupportFragmentManager().findFragmentByTag(InfoFragment.TAG);
+				if (isSuccessful && action.equals(Utils.ACTION_ON_REGISTERED) && frag != null && frag.isVisible()) {
+					Toast.makeText(TabActivity.this, R.string.refreshing_after_register, Toast.LENGTH_SHORT).show();
+					frag.refreshInfo();
+				} else {
+					Toast.makeText(TabActivity.this, msg, Toast.LENGTH_SHORT).show();
+				}
+			}
+			
 		}
-	}
+	};
 
 	/*
 	 * 
