@@ -100,7 +100,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 ```
 
 In the manifest the service should be registered with the correct path to the service.
-The `service` should be defined inide of the `application` tag.
+The `service` should be defined inside of the `application` tag.
 If` GCMIntentService` is in the package root, then follow the below example:
 ``` XML
 <!--
@@ -114,7 +114,7 @@ If` GCMIntentService` is in the package root, then follow the below example:
 Register the GCM Receiver in the manifest.
 This will receive intents from GCM services and then forward them through to the `IntentService` defined above.
 Be sure to replace the category tag with your own package name.
-The `receiver` should be defined inide of the `application` tag.
+The `receiver` should be defined inside of the `application` tag.
 
 ``` XML
 <!--
