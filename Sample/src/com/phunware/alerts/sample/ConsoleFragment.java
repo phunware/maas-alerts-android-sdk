@@ -55,6 +55,7 @@ public class ConsoleFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		Log.v(TAG, "onStart");
+		mActivityLink.onFragmentStarted();
 	}
 	
 	@Override

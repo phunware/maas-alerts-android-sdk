@@ -124,5 +124,9 @@ public class ConsoleOutput implements Serializable{
 		 * Called when the console should be cleared
 		 */
 		public void clearConsole();
+		/**
+		 * 
+		 */
+		public void onFragmentStarted();
 	}
 }

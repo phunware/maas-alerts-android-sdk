@@ -329,4 +329,9 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 		mConsoleOutput.appendToConsole(text);
 		flushToConsole();
 	}
+
+	@Override
+	public void onFragmentStarted() {
+		flushToConsole();
+	}
 }
