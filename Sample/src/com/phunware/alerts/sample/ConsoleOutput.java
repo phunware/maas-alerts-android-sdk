@@ -101,6 +101,17 @@ public class ConsoleOutput implements Serializable{
 	}
 	
 	/**
+	 * Check if the console is empty or not
+	 * @return True if empty, false if not
+	 */
+	public boolean isEmpty()
+	{
+		if(mText == null)
+			return true;
+		return mText.trim().length() == 0;
+	}
+	
+	/**
 	 * Interface for communication between an activity managing this console and fragments
 	 */
 	public interface ConsoleLogger{

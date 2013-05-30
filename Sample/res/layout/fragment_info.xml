@@ -26,6 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+            <TextView
+                android:id="@+id/env_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/environment"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/env_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/app_id_title"
@@ -33,12 +45,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/maas_applicationid"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
             <TextView
                 android:id="@+id/app_id_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="testappid"
+                android:text=""
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -88,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Send Postive Click" />
+                android:text="Send Positive Click" />
         </LinearLayout>
     </ScrollView>
 

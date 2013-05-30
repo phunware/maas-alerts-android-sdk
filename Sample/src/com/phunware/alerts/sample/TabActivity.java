@@ -84,7 +84,7 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
         
         //Start the session here
     	PwCoreSession.getInstance().activityStartSession(this);
-    	mConsoleOutput.appendToConsole("Is the device registered for alerts? "+PwAlertsRegister.hasRegistered(this));
+    	mConsoleOutput.appendToConsole("Is the device registered for alerts? "+( PwAlertsRegister.hasRegistered(this) ? "Yes!" : "No, register with the menu button"));
         
         IntentFilter filter = new IntentFilter();
         filter.addAction(Utils.ACTION_ON_REGISTERED);
@@ -296,6 +296,9 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 		// String extrasStr = printAlertExtras(extras);
 		String extrasStr = extras;
 		String data = bundle.getString(Utils.INTENT_ALERT_DATA);
+		
+		mTabHost.setCurrentTabByTag(ConsoleFragment.TAG);
+		//this.onTabChanged(ConsoleFragment.TAG);
 
 		// Show what's information is included in the alert message.
 		

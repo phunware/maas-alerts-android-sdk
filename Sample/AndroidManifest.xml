@@ -17,6 +17,10 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- Keeps the processor from sleeping when a message is received. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- Used to add vibration on notifications -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
     <!--
      Creates a custom permission so only this app can receive its messages.
      NOTE: the permission *must* be called PACKAGE.permission.C2D_MESSAGE,

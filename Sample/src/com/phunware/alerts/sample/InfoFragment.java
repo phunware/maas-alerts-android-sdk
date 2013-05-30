@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.phunware.alerts.PwAlertsRegister;
+import com.phunware.core.CoreModule;
+import com.phunware.core.PwCoreModule;
 import com.phunware.core.PwCoreSession;
 
 public class InfoFragment extends Fragment {
@@ -67,6 +69,16 @@ public class InfoFragment extends Fragment {
 		String token = sp
 				.getString(PREFS_ALERTS_REGISTER_GCM_TOKEN, null);
 		((TextView)getView().findViewById(R.id.device_token_value)).setText(token);
+		
+		CoreModule[] arr = PwCoreModule.getInstance().getCoreModuleManager().getInstalledModuleObjectArray();
+		String str = "";
+		for(CoreModule cm : arr)
+		{
+			if(!str.equals(""))
+				str += "\n";
+			str += cm;
+		}
+		((TextView)getView().findViewById(R.id.env_value)).setText(str);
 	}
 
 	@Override

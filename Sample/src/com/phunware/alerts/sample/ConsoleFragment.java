@@ -1,7 +1,5 @@
 package com.phunware.alerts.sample;
 
-import com.phunware.alerts.sample.ConsoleOutput.ConsoleLogger;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.phunware.alerts.sample.ConsoleOutput.ConsoleLogger;
 
 public class ConsoleFragment extends Fragment {
 	
@@ -54,33 +54,21 @@ public class ConsoleFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		initConsoleText();
+		Log.v(TAG, "onStart");
 	}
 	
-	/**
-	 * Initialize the console text from arguments
-	 * @see Fragment#getArguments()
-	 */
-	private void initConsoleText()
-	{
-		String text = "";
-		Bundle args = getArguments();
-		if(args != null)
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		Log.v(TAG, "onActivityCreated");
+		if(savedInstanceState != null)
 		{
-			ConsoleOutput console = (ConsoleOutput)args.getSerializable(ARG_CONSOLE_TEXT);
-			if(console == null)
-			{
-				//Log.w(TAG, "text is null");
-				text = "";
-			}
+			String text = savedInstanceState.getString("text");
+			if(text != null)
+				mTextConsole.setText(text);
 			else
-			{
-				text = console.getConsole();
-			}
+				Log.i(TAG, "text from saved state is null");
 		}
-		else
-			Log.w(TAG, "no arguments");
-		mTextConsole.setText(text);
+		super.onActivityCreated(savedInstanceState);
 	}
 	
 	@Override
@@ -106,6 +94,13 @@ public class ConsoleFragment extends Fragment {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if(mTextConsole != null)
+			outState.putString("text", mTextConsole.getText().toString().trim());
+		super.onSaveInstanceState(outState);
 	}
 	
 	/**

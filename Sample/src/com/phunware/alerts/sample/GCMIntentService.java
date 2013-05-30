@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -43,8 +44,6 @@ public class GCMIntentService extends PwAlertsIntentService {
 	public void onMessageAlerts(Context context, PwAlertExtras extras,
 			JSONObject data) {
 		
-		Log.v("DUONG", "ALERTS SAMPLE: onMessageAlerts()");
-
 		Log.v(TAG, "in onMessageAlerts");
 		Log.i(TAG, "Extras = " + extras.toString());
 		Bundle bundle = new Bundle();
@@ -79,6 +78,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 		NotificationCompat.Builder notifBuilder = getNotificationBuilder(
 				context, alertMsg, intent);
 		Notification notification = notifBuilder.build();
+		notification.defaults = 0;
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		NotificationManager notificationManager = (NotificationManager) context
@@ -94,8 +94,15 @@ public class GCMIntentService extends PwAlertsIntentService {
 
 		NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(
 				context);
-		notifBuilder.setSmallIcon(icon).setWhen(when).setContentTitle(title)
-				.setContentText(alertsMessage).setContentIntent(intent);
+		notifBuilder.setSmallIcon(icon)
+				.setWhen(when)
+				.setContentTitle(title)
+				.setContentText(alertsMessage)
+				.setContentIntent(intent)
+//				.setVibrate(new long[] { 500,500,500,500 })
+				.setVibrate(new long[]{200,100,200,200,200,100,200,200,200,600,200,200,200,200})
+//				.setVibrate(new long[]{300,200,300,400,300,200,300,400,300,600,300,400,300})
+				.setLights(Color.YELLOW, 500, 500);
 
 		return notifBuilder;
 	}
