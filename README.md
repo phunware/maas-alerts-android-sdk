@@ -29,13 +29,13 @@ These methods should be called asynchronously, or outside of the main UI thread.
 In your implementation of `GCMIntentService` (See below for implementation details) there are two methods that
 will be called. `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`.
 
-`onRegistered` is called when the device has registerd succesffuly or unsuccessfuly. The first parameter is a flag
-signifying this status. The second parameter will provide an error message or `null` if the operation is 
-successful.
+`onRegistered` is called when the device has registered successfully or unsuccessfully.
+The first parameter is a flag signifying this status.
+The second parameter will provide an error message or `null` if the operation is successful.
 
-`onUnregistered` is called when the device has registerd succesffuly or unsuccessfuly. The first parameter is a flag
-signifying this status. The second parameter will provide an error message or `null` if the operation is 
-successful.
+`onUnregistered` is called when the device has unregistered successfully or unsuccessfully.
+The first parameter is a flag signifying this status.
+The second parameter will provide an error message or `null` if the operation is successful.
 
 ##How do I get a list of subscriptions
 To get the list of available subscriptions, call the line
