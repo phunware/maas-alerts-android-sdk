@@ -9,6 +9,16 @@ If unsuccessful, the attempt is made again the next time the app starts.
 
 ##Prerequisites
 The MaaS Alerts SDK requires the `MaaS Core SDK`.
+Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
+``` Java
+@Override
+public void onCreate() {
+    super.onCreate();
+    /* Other Code */
+    PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance(), ...);
+    /* Other code */
+}
+```
 
 ##How do I dynamically unregister and register?
 You can manually perform an unregister and register action simply by calling the static methods
