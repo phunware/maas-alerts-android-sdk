@@ -41,8 +41,8 @@ To get the list of available subscriptions, call the line
 `PwAlertsSubscription.getSubscriptionGroups(Context context)`.
 This will return an `ArrayList` of `PwSubscription` objects.
 Each object maintains an `id`, a `name`, and an `isSubscribed` flag.
-_**The server maintains a subscribed state for each subscription, however this information isn’t
-passed back in this call. It is up to the developer to update and persist the saved state of each subscription. Using the saveSubscriptions() method, the subscription state can be saved on the server. PwAlertsSubscription.saveSubscriptions(Context context, List<Subscription> subscriptions). This will use the isSubscribedflag in each of the models in the list. When the Alerts SDK is installed for the first time, or when it runs on the app’s first start, a call is made to the back end in order to reset all the subscriptions to an unsubscribed state. This method should be called asynchronously, or outside of the main UI thread.**_
+The server maintains a subscribed state for each subscription, however this information isn’t
+passed back in this call. It is up to the developer to update and persist the saved state of each subscription. Using the saveSubscriptions() method, the subscription state can be saved on the server. PwAlertsSubscription.saveSubscriptions(Context context, List<Subscription> subscriptions). This will use the isSubscribedflag in each of the models in the list. When the Alerts SDK is installed for the first time, or when it runs on the app’s first start, a call is made to the back end in order to reset all the subscriptions to an unsubscribed state. _**This method should be called asynchronously, or outside of the main UI thread.**_
 
 ##How do I send an updated list of subscription preferences to the server?
 Using the `saveSubscriptions()` method the subscription state can be saved on the server.
