@@ -15,7 +15,6 @@ public class AlertsApplication extends Application {
 		String accessKey = "testappid"; 
 		String signatureKey = "zxcvbnmasdfghasdfasdfasdf";
 		String encryptionKey = "zxcvbnmasdfghjklqwertyuiop123456";
-		PwLog.setShowLog(true);
 		
 		PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance());
 		
