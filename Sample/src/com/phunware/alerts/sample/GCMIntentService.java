@@ -72,39 +72,26 @@ public class GCMIntentService extends PwAlertsIntentService {
 		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-		PendingIntent intent = PendingIntent.getActivity(context, 0,
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
 				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		NotificationCompat.Builder notifBuilder = getNotificationBuilder(
-				context, alertMsg, intent);
-		Notification notification = notifBuilder.build();
-		notification.defaults = 0;
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		Notification notification = new NotificationCompat.Builder(context)
+		        .setContentTitle("Received Alert!")
+		        .setContentText(alertMsg)
+		        .setTicker(alertMsg)
+		        .setWhen(when)
+		        .setContentIntent(pendingIntent)
+		        .setDefaults(Notification.DEFAULT_SOUND)
+		        .setVibrate(new long[] { 500,500,500,500 })
+		        .setLights(Color.BLUE, 500, 500)
+		        .setAutoCancel(true)
+		        .setSmallIcon(R.drawable.ic_launcher)
+		        .build();
 
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
+		//make sure the id is unique so it won't be overwritten
 		notificationManager.notify((int) when, notification);
-	}
-
-	private NotificationCompat.Builder getNotificationBuilder(Context context,
-			String alertsMessage, PendingIntent intent) {
-		long when = System.currentTimeMillis();
-		int icon = R.drawable.ic_launcher;
-		String title = getApplicationContext().getString(R.string.app_name);
-
-		NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(
-				context);
-		notifBuilder.setSmallIcon(icon)
-				.setWhen(when)
-				.setContentTitle(title)
-				.setContentText(alertsMessage)
-				.setContentIntent(intent)
-//				.setVibrate(new long[] { 500,500,500,500 })
-				.setVibrate(new long[]{200,100,200,200,200,100,200,200,200,600,200,200,200,200})
-//				.setVibrate(new long[]{300,200,300,400,300,200,300,400,300,600,300,400,300})
-				.setLights(Color.YELLOW, 500, 500);
-
-		return notifBuilder;
 	}
 
 	@Override
