@@ -60,9 +60,6 @@ These go outside of the `application` tag:
 
 ``` XML
 <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 <!-- GCM requires a Google account. -->
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
