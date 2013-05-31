@@ -12,12 +12,13 @@ public class AlertsApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		
-		String accessKey = "testappid"; 
-		String signatureKey = "zxcvbnmasdfghasdfasdfasdf";
+		String appId = "8";
+		String accessKey = "71014513f265c91a2d4ad0b083e09b0db561741d"; 
+		String signatureKey = "ffa238529d95875bee142addbc34a0f28b059ee2";
 		String encryptionKey = "zxcvbnmasdfghjklqwertyuiop123456";
 		
 		PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance());
 		
-		PwCoreSession.getInstance().registerKeys(this, accessKey, signatureKey, encryptionKey);
+		PwCoreSession.getInstance().registerKeys(this, appId, accessKey, signatureKey, encryptionKey);
 	}
 }
