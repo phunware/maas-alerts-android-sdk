@@ -7,6 +7,19 @@ The MaaS Alerts SDK provides push notification functionality.
 Once installed, the SDK will automatically attempt to register for push notifications.
 If unsuccessful, the attempt is made again the next time the app starts. 
 
+##Server Setup
+Log into your google account's console "https://code.google.com/apis/console".
+You will need an email account with Google to have access to the Google console. 
+Select "Services" from your console and enable "Google Cloud Messaging for Android". 
+Once GCM is turned on, select "API Access" from the menu and look for the "Api Key" under the section "Key for Android apps". Record the Api key.
+
+Once you have the Api key, you will need the send id.
+To get the sender id,  look on the google console address bar copy the  value of the "project" key.
+i.e https://code.google.com/apis/console/X/X/#project:111111111:access
+
+Once you have both the api key and sender id, log into maas.phunware.com. Select "Alerts & Notifications" from the menu and then select configure. Select your app you created, otherwise create one first. Once you have an app select the desire app and enter the token which is your Api Key and Sender id. Select save and now you have finished configuring your app.
+
+
 ##Prerequisites
 The MaaS Alerts SDK requires the `MaaS Core SDK`.
 Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
