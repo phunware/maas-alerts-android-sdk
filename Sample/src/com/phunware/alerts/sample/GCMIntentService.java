@@ -18,7 +18,7 @@ import com.phunware.alerts.PwAlertsIntentService;
 import com.phunware.alerts.models.PwAlertExtras;
 
 /*
- * PRAISEAlerts uses Google Cloud Messaging (GCM) and handle data delivery to
+ * MaaS Alerts uses Google Cloud Messaging (GCM) and handle data delivery to
  * clients app. Use this class to receive responses from GCM. As mentioned part
  * of GCM integration, by default this class must be named .GCMIntentService.
  * 
@@ -32,14 +32,6 @@ public class GCMIntentService extends PwAlertsIntentService {
 		Log.v(TAG, "in onMessageAlertsError: " + e.getMessage());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.phunware.praisealerts.PRAISEAlertsIntentService#onMessageAlerts(android
-	 * .content.Context, com.phunware.praisealerts.models.AlertExtras,
-	 * org.json.JSONObject)
-	 */
 	@Override
 	public void onMessageAlerts(Context context, PwAlertExtras extras,
 			JSONObject data) {
@@ -47,8 +39,9 @@ public class GCMIntentService extends PwAlertsIntentService {
 		Log.v(TAG, "in onMessageAlerts");
 		Log.i(TAG, "Extras = " + extras.toString());
 		Bundle bundle = new Bundle();
-		bundle.putString(Utils.INTENT_ALERT_EXTRA, extras.toString());
-		bundle.putString(Utils.INTENT_ALERT_EXTRA_PID, extras.getDataPID());
+		bundle.putParcelable("alertExtras", extras);
+//		bundle.putString(Utils.INTENT_ALERT_EXTRA, extras.toString());
+//		bundle.putString(Utils.INTENT_ALERT_EXTRA_PID, extras.getDataPID());
 		if (data != null) {
 			try {
 				bundle.putString(Utils.INTENT_ALERT_DATA, data.toString(2));

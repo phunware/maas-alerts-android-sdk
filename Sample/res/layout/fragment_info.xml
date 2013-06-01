@@ -27,6 +27,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
             <TextView
+                android:id="@+id/appid_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/application_id"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/appid_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+            
+            <TextView
                 android:id="@+id/env_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,13 +53,13 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/app_id_title"
+                android:id="@+id/access_key_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/maas_applicationid"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <TextView
-                android:id="@+id/app_id_value"
+                android:id="@+id/access_key_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -93,13 +106,14 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
-            
+            <!-- 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="Send Positive Click" />
+                -->
         </LinearLayout>
     </ScrollView>
 

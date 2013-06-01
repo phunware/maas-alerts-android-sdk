@@ -1,5 +1,11 @@
 package com.phunware.alerts.sample;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 
@@ -29,4 +35,30 @@ public class Utils {
 		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MaaS Alerts Console "+com.phunware.core.internal.Utils.getCurrentTimeFormatted());
 		packageContext.startActivity(Intent.createChooser(emailIntent, "Send email..."));
 	}
+	
+	 /**
+     * Given a date, convert the string into a long format.
+     * @param date
+     * @return
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static long convertDateToLong(String date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Calendar uc = Calendar.getInstance(TimeZone.getDefault());
+            long offset = uc.get(Calendar.ZONE_OFFSET) + uc.get(Calendar.DST_OFFSET);
+            try {
+                    uc.setTime(sdf.parse(date + offset));
+            } catch (ParseException e) {
+                    e.printStackTrace();
+            }
+            return uc.getTimeInMillis();
+    }
+    
+    public static String convertLongToString(long timestamp)
+    {
+    	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    	Calendar uc = Calendar.getInstance();
+    	uc.setTimeInMillis(timestamp);
+    	return sdf.format(uc.getTime());
+    }
 }

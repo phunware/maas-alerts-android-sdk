@@ -30,13 +30,13 @@ public class InfoFragment extends Fragment {
 
 		setHasOptionsMenu(true);
 
-		Button test = (Button) view.findViewById(R.id.button1);
-		test.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PwAlertsRegister.sendPositiveClick(InfoFragment.this.getActivity(), "111");
-			}
-		});
+//		Button test = (Button) view.findViewById(R.id.button1);
+//		test.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				PwAlertsRegister.sendPositiveClick(InfoFragment.this.getActivity(), "111");
+//			}
+//		});
 
 		return view;
 	}
@@ -53,7 +53,7 @@ public class InfoFragment extends Fragment {
 	
 	public void refreshInfo() {
 		String accessKey = PwCoreSession.getInstance().getAccessKey();
-		((TextView) getView().findViewById(R.id.app_id_value))
+		((TextView) getView().findViewById(R.id.access_key_value))
 				.setText(accessKey);
 
 		String deviceId = PwCoreSession.getInstance().getSessionData()
@@ -64,21 +64,14 @@ public class InfoFragment extends Fragment {
 		String sessionId = PwCoreSession.getInstance().getSessionId(getActivity());
 		((TextView)getView().findViewById(R.id.session_id_value)).setText(sessionId);
 		
-		SharedPreferences sp = com.phunware.core.internal.Utils
-				.getSharedPreferences(getActivity(), PREFS_ALERTS_REGISTER);
-		String token = sp
-				.getString(PREFS_ALERTS_REGISTER_GCM_TOKEN, null);
+		String token = deviceGCMToken();
 		((TextView)getView().findViewById(R.id.device_token_value)).setText(token);
 		
-		CoreModule[] arr = PwCoreModule.getInstance().getCoreModuleManager().getInstalledModuleObjectArray();
-		String str = "";
-		for(CoreModule cm : arr)
-		{
-			if(!str.equals(""))
-				str += "\n";
-			str += cm;
-		}
+		String str = buildEnvString();
 		((TextView)getView().findViewById(R.id.env_value)).setText(str);
+		
+		String appId = PwCoreSession.getInstance().getApplicationId();
+		((TextView)getView().findViewById(R.id.appid_value)).setText(appId);
 	}
 
 	@Override
@@ -99,14 +92,41 @@ public class InfoFragment extends Fragment {
 		}
 
 		else if (id == R.id.menu_email) {
-			String body = "MaaS Application Key:\n"
+			String body =
+					"Application Id:\n"
+					+ PwCoreSession.getInstance().getApplicationId()
+					+ "\n\nEnvironment\n"
+					+ buildEnvString()
+					+ "\n\nAccess Key:\n"
 					+ PwCoreSession.getInstance().getAccessKey()
 					+ "\n\nDevice Id:\n"
 					+ PwCoreSession.getInstance().getSessionData()
-							.getDeviceId();
+							.getDeviceId()
+					+ "\n\nDevice GCM Token\n"
+					+ deviceGCMToken();
 			Utils.email(getActivity(), body);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public static String buildEnvString()
+	{
+		CoreModule[] arr = PwCoreModule.getInstance().getCoreModuleManager().getInstalledModuleObjectArray();
+		String str = "";
+		for(CoreModule cm : arr)
+		{
+			if(!str.equals(""))
+				str += "\n";
+			str += cm;
+		}
+		return str;
+	}
+	
+	public String deviceGCMToken()
+	{
+		SharedPreferences sp = com.phunware.core.internal.Utils
+				.getSharedPreferences(getActivity(), PREFS_ALERTS_REGISTER);
+		return sp.getString(PREFS_ALERTS_REGISTER_GCM_TOKEN, null);
 	}
 }

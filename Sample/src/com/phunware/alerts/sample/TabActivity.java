@@ -2,6 +2,9 @@ package com.phunware.alerts.sample;
 
 import java.util.HashMap;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,15 +20,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.Toast;
 
 import com.phunware.alerts.PwAlertsRegister;
+import com.phunware.alerts.models.PwAlertExtras;
 import com.phunware.alerts.sample.ConsoleOutput.ConsoleLogger;
+import com.phunware.alerts.sample.PastAlertsFragment.PastAlertsFragmentListener;
+import com.phunware.alerts.sample.db.AlertModel;
+import com.phunware.alerts.sample.db.AlertsProvider;
 import com.phunware.core.PwCoreSession;
 
-public class TabActivity extends FragmentActivity implements OnTabChangeListener, ConsoleLogger{
+public class TabActivity extends FragmentActivity implements OnTabChangeListener, ConsoleLogger, PastAlertsFragmentListener{
 
 	private static final String TAG = "TabActivity";
 	/**
@@ -36,6 +43,9 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 	private TabHost mTabHost;
     private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo mLastTab = null;
+    
+    //database helper
+    private AlertsProvider mDb;
 
     @SuppressWarnings("rawtypes")
     private class TabInfo {
@@ -80,6 +90,8 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 
         setContentView(R.layout.activity_tabs);
         
+        mDb = new AlertsProvider(this);
+        
         mConsoleOutput = new ConsoleOutput(savedInstanceState);
         
         //Start the session here
@@ -113,6 +125,15 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
     protected void onStop() {
     	super.onStop();
     	PwCoreSession.getInstance().activityStopSession(this);
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+		if (mDb != null) {
+			mDb.close();
+			mDb = null;
+		}
     }
     
     @Override
@@ -160,6 +181,13 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
         			.setIndicator(r.getString(R.string.title_console), r.getDrawable(R.drawable.ic_tab_console)),
         		( tabInfo = new TabInfo(ConsoleFragment.TAG, ConsoleFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
+        TabActivity.addTab(
+        		this, this.mTabHost, 
+        		this.mTabHost.newTabSpec(PastAlertsFragment.TAG)
+        			.setIndicator(r.getString(R.string.title_past_alerts), r.getDrawable(android.R.drawable.ic_menu_recent_history)),
+        		( tabInfo = new TabInfo(PastAlertsFragment.TAG, PastAlertsFragment.class, args)));
+        this.mapTabInfo.put(tabInfo.tag, tabInfo);
+        
         // Default to first tab
         this.onTabChanged(InfoFragment.TAG);
         //
@@ -290,19 +318,34 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 			Log.i(TAG, "updateResult returning, null intent extras");
 			return;
 		}
+
+		PwAlertExtras pwAlert = (PwAlertExtras)bundle.getParcelable("alertExtras");
 		
-		String extras = bundle.getString(Utils.INTENT_ALERT_EXTRA);
-		String pid = bundle.getString(Utils.INTENT_ALERT_EXTRA_PID);
-		// String extrasStr = printAlertExtras(extras);
-		String extrasStr = extras;
+//		String extras = pwAlert.getRawBundle().getString(Utils.INTENT_ALERT_EXTRA);
+		String extras = pwAlert.toString();
+//		String pid = bundle.getString(Utils.INTENT_ALERT_EXTRA_PID);
+		String pid = pwAlert.getDataPID();
 		String data = bundle.getString(Utils.INTENT_ALERT_DATA);
+		
+		try {
+			JSONObject objData = null;
+			try {
+				objData = new JSONObject(data);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			AlertModel alertModel = new AlertModel(pwAlert, objData);
+			alertModel.save(mDb);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		mTabHost.setCurrentTabByTag(ConsoleFragment.TAG);
 		//this.onTabChanged(ConsoleFragment.TAG);
 
 		// Show what's information is included in the alert message.
 		
-		String text = "Alert Extras:\n" + extrasStr
+		String text = "Alert Extras:\n" + extras
 				+ "\nData:\n" + data;
 		mConsoleOutput.appendToConsole(text);
 		flushToConsole();
@@ -333,5 +376,17 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 	@Override
 	public void onFragmentStarted() {
 		flushToConsole();
+	}
+
+	@Override
+	public void loadAllAlerts() {
+		PastAlertsFragment frag = (PastAlertsFragment) getSupportFragmentManager().findFragmentByTag(PastAlertsFragment.TAG);
+		if(frag != null && frag.isVisible())
+			frag.doSetData(mDb.getAllAlerts(null));
+	}
+
+	@Override
+	public void deleteAlert(long alertId) {
+		mDb.deleteAlert(alertId);
 	}
 }
