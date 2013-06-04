@@ -23,6 +23,7 @@
     <string name="environment">Environment</string>
     <string name="application_id">Application Id</string>
    	<string name="maas_applicationid">Access Key</string>
+   	<string name="sig_key">Signature Key</string>
    	<string name="device_token">Device GCM Token</string>
    	<string name="device_id">Device ID</string>
    	<string name="session_id">Session ID</string>

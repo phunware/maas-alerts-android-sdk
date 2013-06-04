@@ -13,8 +13,8 @@ public class AlertsApplication extends Application {
 		super.onCreate();
 		
 		String appId = "8";
-		String accessKey = "71014513f265c91a2d4ad0b083e09b0db561741d"; 
-		String signatureKey = "ffa238529d95875bee142addbc34a0f28b059ee2";
+		String accessKey = "fa0757223f9eb4b66a0f1959a5d0801869c7465e"; 
+		String signatureKey = "784c57caa5b0abd2255444389a49be00ac8316e7";
 		String encryptionKey = "zxcvbnmasdfghjklqwertyuiop123456";
 		
 		PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance());

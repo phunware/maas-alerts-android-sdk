@@ -9,12 +9,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.phunware.alerts.PwAlertsRegister;
 import com.phunware.core.CoreModule;
 import com.phunware.core.PwCoreModule;
 import com.phunware.core.PwCoreSession;
@@ -72,6 +69,9 @@ public class InfoFragment extends Fragment {
 		
 		String appId = PwCoreSession.getInstance().getApplicationId();
 		((TextView)getView().findViewById(R.id.appid_value)).setText(appId);
+	
+		String sigKey = PwCoreSession.getInstance().getSignatureKey();
+		((TextView)getView().findViewById(R.id.sig_value)).setText(sigKey);
 	}
 
 	@Override
