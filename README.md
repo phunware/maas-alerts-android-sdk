@@ -8,7 +8,7 @@ Once installed, the SDK will automatically attempt to register for push notifica
 If unsuccessful, the attempt is made again the next time the app starts. 
 
 ##Server Setup
-*For detailed instructions, visit Google's official GCM documentation here: http://developer.android.com/google/gcm/gs.html*
+*For detailed instructions, visit our GCM Setup documentation here: http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm*
 
 Log into your google account's console "https://code.google.com/apis/console".
 You will need an email account with Google to have access to the Google console. 
