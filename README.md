@@ -8,6 +8,8 @@ Once installed, the SDK will automatically attempt to register for push notifica
 If unsuccessful, the attempt is made again the next time the app starts. 
 
 ##Server Setup
+*For detailed instructions, visit Google's official GCM documentation here: http://developer.android.com/google/gcm/gs.html*
+
 Log into your google account's console "https://code.google.com/apis/console".
 You will need an email account with Google to have access to the Google console. 
 Select "Services" from your console and enable "Google Cloud Messaging for Android". 
