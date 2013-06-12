@@ -1,6 +1,7 @@
 #Mobile as a Service
 
 ######Android MaaS Alerts Documentation
+**v 1.0.0**
 ________________
 ##Overview
 The MaaS Alerts SDK provides push notification functionality.
