@@ -32,7 +32,7 @@ import com.phunware.alerts.sample.db.AlertModel;
 import com.phunware.alerts.sample.db.AlertsProvider;
 import com.phunware.core.PwCoreSession;
 
-public class TabActivity extends FragmentActivity implements OnTabChangeListener, ConsoleLogger, PastAlertsFragmentListener{
+public class AlertsSample extends FragmentActivity implements OnTabChangeListener, ConsoleLogger, PastAlertsFragmentListener{
 
 	private static final String TAG = "TabActivity";
 	/**
@@ -163,25 +163,25 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
         mTabHost.setup();
         TabInfo tabInfo = null;
         Resources r = getResources();
-        TabActivity.addTab(
+        AlertsSample.addTab(
         		this, this.mTabHost, 
         		this.mTabHost.newTabSpec(InfoFragment.TAG)
         			.setIndicator(r.getString(R.string.title_info), r.getDrawable(R.drawable.ic_tab_info)),
         		( tabInfo = new TabInfo(InfoFragment.TAG, InfoFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
-        TabActivity.addTab(
+        AlertsSample.addTab(
         		this, this.mTabHost, 
         		this.mTabHost.newTabSpec(SubscriptionsFragment.TAG)
         			.setIndicator(r.getString(R.string.title_subscriptions), r.getDrawable(R.drawable.ic_tab_subscriptions)),
         		( tabInfo = new TabInfo(SubscriptionsFragment.TAG, SubscriptionsFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
-        TabActivity.addTab(
+        AlertsSample.addTab(
         		this, this.mTabHost, 
         		this.mTabHost.newTabSpec(ConsoleFragment.TAG)
         			.setIndicator(r.getString(R.string.title_console), r.getDrawable(R.drawable.ic_tab_console)),
         		( tabInfo = new TabInfo(ConsoleFragment.TAG, ConsoleFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
-        TabActivity.addTab(
+        AlertsSample.addTab(
         		this, this.mTabHost, 
         		this.mTabHost.newTabSpec(PastAlertsFragment.TAG)
         			.setIndicator(r.getString(R.string.title_past_alerts), r.getDrawable(android.R.drawable.ic_menu_recent_history)),
@@ -201,7 +201,7 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
      * @param clss
      * @param args
      */
-    private static void addTab(TabActivity activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo) {
+    private static void addTab(AlertsSample activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo) {
         // Attach a Tab view factory to the spec
         tabSpec.setContent(activity.new TabFactory(activity));
         String tag = tabSpec.getTag();
@@ -288,10 +288,10 @@ public class TabActivity extends FragmentActivity implements OnTabChangeListener
 				//refresh info fragment
 				InfoFragment frag = (InfoFragment) getSupportFragmentManager().findFragmentByTag(InfoFragment.TAG);
 				if (isSuccessful && action.equals(Utils.ACTION_ON_REGISTERED) && frag != null && frag.isVisible()) {
-					Toast.makeText(TabActivity.this, R.string.refreshing_after_register, Toast.LENGTH_SHORT).show();
+					Toast.makeText(AlertsSample.this, R.string.refreshing_after_register, Toast.LENGTH_SHORT).show();
 					frag.refreshInfo();
 				} else {
-					Toast.makeText(TabActivity.this, msg, Toast.LENGTH_SHORT).show();
+					Toast.makeText(AlertsSample.this, msg, Toast.LENGTH_SHORT).show();
 				}
 			}
 			

@@ -50,7 +50,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 			}
 		}
 		generateNotification(context, extras.getAlertMessage(), bundle,
-				TabActivity.class);
+				AlertsSample.class);
 	}
 
 	private void generateNotification(Context context, String alertMsg,

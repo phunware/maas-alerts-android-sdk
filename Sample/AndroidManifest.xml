@@ -6,6 +6,8 @@
 
     <!-- This permission is only necessary to get wifi specific analytic properties (wifi state, ip address, mac address, etc -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- OPTIONAL Used to determine if there is a network connection or not. Helps in sending analytic calls efficiently -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Necessary for core to communicate with MaaS server -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -45,7 +47,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.phunware.alerts.sample.TabActivity"
+            android:name="com.phunware.alerts.sample.AlertsSample"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,6 +89,12 @@
 				<action android:name="org.openudid.GETUDID" />
 			</intent-filter>
 		</service>
+		<!-- OPTIONAL Used by MaaS Core for efficient Analytic Caching -->
+		<receiver android:name="com.phunware.core.internal.CoreReceiver">
+		    <intent-filter>
+		        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+		    </intent-filter>
+		</receiver>
     </application>
 
 </manifest>
