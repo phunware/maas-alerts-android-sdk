@@ -3,6 +3,8 @@ package com.phunware.alerts.sample;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import android.annotation.SuppressLint;
@@ -32,7 +34,7 @@ public class Utils {
 		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "ytran@phunware.com", "rszabo@phunware.com" });
 		emailIntent.setType("plain/text");
 		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
-		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MaaS Alerts Console "+com.phunware.core.internal.Utils.getCurrentTimeFormatted());
+		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MaaS Alerts Console "+getCurrentTimeFormatted());
 		packageContext.startActivity(Intent.createChooser(emailIntent, "Send email..."));
 	}
 	
@@ -61,4 +63,23 @@ public class Utils {
     	uc.setTimeInMillis(timestamp);
     	return sdf.format(uc.getTime());
     }
+    
+    /**
+	 * Convenience method to get the current time as a string formatted as
+	 * <code>yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</code>.
+	 * 
+	 * @return The current time formatted as
+	 *         <code>yyyy-MM-dd'T'HH:mm:ss'Z'</code>; RFC3339 format
+	 */
+	public static String getCurrentTimeFormatted() {
+		long now = System.currentTimeMillis();
+		TimeZone utc = TimeZone.getTimeZone("UTC");
+		GregorianCalendar cal = new GregorianCalendar(utc);
+		cal.setTimeInMillis(now);
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+		formatter.setTimeZone(utc);
+		return formatter.format(cal.getTime());
+	}
 }

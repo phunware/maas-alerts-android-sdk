@@ -55,7 +55,7 @@ public class ConsoleOutput implements Serializable{
 	 */
 	public String appendToConsole(String text)
 	{
-		String timestamp = com.phunware.core.internal.Utils.getCurrentTimeFormatted();
+		String timestamp = Utils.getCurrentTimeFormatted();
 		
 		mText += "\n"
 				+ "\n+++++++++++++++++++++++++++++\n"

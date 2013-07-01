@@ -1,6 +1,5 @@
 package com.phunware.alerts.sample;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.phunware.core.CoreModule;
-import com.phunware.core.PwCoreModule;
+import com.phunware.alerts.PwAlertsRegister;
 import com.phunware.core.PwCoreSession;
 
 public class InfoFragment extends Fragment {
@@ -45,26 +43,22 @@ public class InfoFragment extends Fragment {
 		refreshInfo();
 	}
 	
-	protected static final String PREFS_ALERTS_REGISTER = "com.phunware.alerts.register";
-	private static final String PREFS_ALERTS_REGISTER_GCM_TOKEN = "com.phunware.alerts.register.gcm_token";
-	
 	public void refreshInfo() {
 		String accessKey = PwCoreSession.getInstance().getAccessKey();
 		((TextView) getView().findViewById(R.id.access_key_value))
 				.setText(accessKey);
 
-		String deviceId = PwCoreSession.getInstance().getSessionData()
-				.getDeviceId();
+		String deviceId = PwCoreSession.getInstance().getDeviceId();
 		((TextView) getView().findViewById(R.id.device_id_value))
 				.setText(deviceId);
 		
 		String sessionId = PwCoreSession.getInstance().getSessionId(getActivity());
 		((TextView)getView().findViewById(R.id.session_id_value)).setText(sessionId);
 		
-		String token = deviceGCMToken();
+		String token = PwAlertsRegister.deviceGCMToken(getActivity());
 		((TextView)getView().findViewById(R.id.device_token_value)).setText(token);
 		
-		String str = buildEnvString();
+		String str = PwCoreSession.getInstance().getEnvironmentString();
 		((TextView)getView().findViewById(R.id.env_value)).setText(str);
 		
 		String appId = PwCoreSession.getInstance().getApplicationId();
@@ -96,37 +90,16 @@ public class InfoFragment extends Fragment {
 					"Application Id:\n"
 					+ PwCoreSession.getInstance().getApplicationId()
 					+ "\n\nEnvironment\n"
-					+ buildEnvString()
+					+ PwCoreSession.getInstance().getEnvironmentString()
 					+ "\n\nAccess Key:\n"
 					+ PwCoreSession.getInstance().getAccessKey()
 					+ "\n\nDevice Id:\n"
-					+ PwCoreSession.getInstance().getSessionData()
-							.getDeviceId()
+					+ PwCoreSession.getInstance().getDeviceId()
 					+ "\n\nDevice GCM Token\n"
-					+ deviceGCMToken();
+					+ PwAlertsRegister.deviceGCMToken(getActivity());
 			Utils.email(getActivity(), body);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	public static String buildEnvString()
-	{
-		CoreModule[] arr = PwCoreModule.getInstance().getCoreModuleManager().getInstalledModuleObjectArray();
-		String str = "";
-		for(CoreModule cm : arr)
-		{
-			if(!str.equals(""))
-				str += "\n";
-			str += cm;
-		}
-		return str;
-	}
-	
-	public String deviceGCMToken()
-	{
-		SharedPreferences sp = com.phunware.core.internal.Utils
-				.getSharedPreferences(getActivity(), PREFS_ALERTS_REGISTER);
-		return sp.getString(PREFS_ALERTS_REGISTER_GCM_TOKEN, null);
 	}
 }

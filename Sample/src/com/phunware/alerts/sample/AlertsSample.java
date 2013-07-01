@@ -94,8 +94,6 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
         
         mConsoleOutput = new ConsoleOutput(savedInstanceState);
         
-        //Start the session here
-    	PwCoreSession.getInstance().activityStartSession(this);
     	mConsoleOutput.appendToConsole("Is the device registered for alerts? "+( PwAlertsRegister.hasRegistered(this) ? "Yes!" : "No, register with the menu button"));
         
         IntentFilter filter = new IntentFilter();
@@ -112,6 +110,13 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
        // Display Push Message
         //This will also flush to the console
         handlePushResult(getIntent());
+    }
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	//Start the session here
+    	PwCoreSession.getInstance().activityStartSession(this);
     }
     
     @Override
