@@ -1,6 +1,5 @@
 package com.phunware.alerts.sample;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -26,7 +25,7 @@ import com.phunware.alerts.PwAlertsSubscriptions;
 import com.phunware.alerts.models.PwSubscription;
 import com.phunware.alerts.sample.ConsoleOutput.ConsoleLogger;
 import com.phunware.core.PwLog;
-import com.phunware.core.exceptions.NoInternetException;
+import com.phunware.core.exceptions.PwException;
 
 public class SubscriptionsFragment extends ListFragment {
 
@@ -205,9 +204,7 @@ public class SubscriptionsFragment extends ListFragment {
 					mAllSubscriptions = new ArrayList<PwSubscription>(
 							PwAlertsSubscriptions
 									.getSubscriptionGroups(getActivity()));
-				} catch (IOException e) {
-					return "Failed! " + e.getMessage();
-				} catch (NoInternetException e) {
+				} catch (PwException e) {
 					return "Failed! " + e.getMessage();
 				}
 				return "Success! Found subscription group.";
@@ -243,11 +240,8 @@ public class SubscriptionsFragment extends ListFragment {
 					PwAlertsSubscriptions.saveSubscriptions(getActivity(),
 							mAllSubscriptions);
 
-				} catch (IOException e) {
+				} catch (PwException e) {
 					return "Failed to update subscription list! "
-							+ e.getMessage();
-				} catch (NoInternetException e) {
-					return "No Internet, failed to update subscription list! "
 							+ e.getMessage();
 				}
 				return "Success! Updated subscription list.";
