@@ -106,10 +106,6 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
         }
-        
-       // Display Push Message
-        //This will also flush to the console
-        handlePushResult(getIntent());
     }
     
     @Override
@@ -317,6 +313,7 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
 	 * @param intent
 	 */
 	public void handlePushResult(Intent intent) {
+		Log.v(TAG, "inHandlePush Result");
 		Bundle bundle = intent.getExtras();
 		if(bundle == null)
 		{
@@ -325,6 +322,7 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
 		}
 
 		PwAlertExtras pwAlert = (PwAlertExtras)bundle.getParcelable("alertExtras");
+		Log.v(TAG, "in handlePushResult alert received: "+pwAlert);
 		
 //		String extras = pwAlert.getRawBundle().getString(Utils.INTENT_ALERT_EXTRA);
 		String extras = pwAlert.toString();
@@ -358,6 +356,7 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
 		// You will need to initialize PRAISEAlertsDataReceiver. What this
 		// does is start a intent service to fetch the alert's payload and send
 		// a positive click to the PRAISE server for analytics.
+		Log.v(TAG, "sending positive click");
 		PwAlertsRegister.sendPositiveClick(getApplicationContext(), pid);
 	}
 

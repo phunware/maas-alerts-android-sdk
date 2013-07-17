@@ -11,25 +11,10 @@ public class AlertsApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-//		PROD -- Prod Test (Android)
-//		String appId = "15";
-//		String accessKey = "d04397f4c0b491f7c6d0f6bcf5c339ab58927cc0"; 
-//		String signatureKey = "23fc11a456de9a0d9202ca381463baab23283c4c";
-		
-//		PROD -- ProdTest 06/17/13
-//		String appId = "39";
-//		String accessKey = "77dd297ccfdee5f944953552776a4d0ac9cf192d"; 
-//		String signatureKey = "ba718b3b7295c240711c70c6a42dfddbcc2e1c97";
-		
-//		STAGE -- QA Test App
-		String appId = "22";
-		String accessKey = "9bd1f5e5af70ca93e16cf77dd1818662a0ae7fbb"; 
-		String signatureKey = "dedff15103549af4780e6bc22314f3de0156f66e";
-		
-//		DEV -- Test App
-//		String appId = "17";
-//		String accessKey = "f466f27ba8b5031ecda93ddcb9baf76b5e0cd1f0 "; 
-//		String signatureKey = "f37c6da8df6f265802b7faa465dafc297e13572d";
+//		DEV - Another Game With Zombies In It
+		String appId = "28";
+		String accessKey = "4f395b9ece015603a936abe74f5916c13e899101"; 
+		String signatureKey = "09a2d6b7c6b50a5d1fcaedcac3f08198a6847a58";
 		
 		PwLog.setShowLog(true);
 		

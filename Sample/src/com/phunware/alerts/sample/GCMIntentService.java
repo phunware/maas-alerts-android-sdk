@@ -91,7 +91,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 	public void onRegistered(boolean isSuccessful, String errMessage) {
 		Log.v(TAG, "in onRegistered: success "+isSuccessful);
 		if(!isSuccessful)
-			Log.e(TAG, errMessage);
+			Log.e(TAG, errMessage==null?"":errMessage);
 		sendCommonLocalBroadcast(isSuccessful, errMessage, Utils.ACTION_ON_REGISTERED);
 	}
 
@@ -100,7 +100,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 	public void onUnregistered(boolean isSuccessful, String errMessage) {
 		Log.v(TAG, "in onUnregistered: success "+isSuccessful);
 		if(!isSuccessful)
-			Log.e(TAG, errMessage);
+			Log.e(TAG, errMessage==null?"":errMessage);
 		sendCommonLocalBroadcast(isSuccessful, errMessage, Utils.ACTION_ON_UNREGISTERED);
 	}
 	
