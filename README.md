@@ -1,7 +1,7 @@
 #Mobile as a Service
 
 ######Android MaaS Alerts Documentation
-**v 1.0.5**
+**v 1.0.6**
 ________________
 ##Overview
 The MaaS Alerts SDK provides push notification functionality.
@@ -9,9 +9,9 @@ Once installed, the SDK will automatically attempt to register for push notifica
 If unsuccessful, the attempt is made again the next time the app starts. 
 
 ##Server Setup
-*For detailed instructions, visit our GCM Setup documentation here: http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm*
+*For detailed instructions, visit our [GCM Setup documentation](http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm).*
 
-Log into your google account's console "https://code.google.com/apis/console".
+Log into your [Google account's API console](https://code.google.com/apis/console).
 You will need an email account with Google to have access to the Google console. 
 Select "Services" from your console and enable "Google Cloud Messaging for Android". 
 Once GCM is turned on, select "API Access" from the menu and look for the "Api Key" under the section "Key for Android apps". Record the Api key.
