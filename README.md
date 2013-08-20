@@ -118,11 +118,11 @@ public class GCMIntentService extends PwAlertsIntentService {
 	}
     
     @Override
-    public void onMessageAlertsError(Context context, AlertExtras extras, Exception e) {
+    public void onMessageAlertsError(Context context, PwAlertExtras extras, Exception e) {
     }
         
     @Override
-     public void onMessageAlerts(Context context, AlertExtras extras,JSONObject data) {
+     public void onMessageAlerts(Context context, PwAlertExtras extras,JSONObject data) {
     }
 }
 ```
