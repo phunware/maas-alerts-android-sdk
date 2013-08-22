@@ -68,7 +68,7 @@ _**This method should be called asynchronously, or outside of the main UI thread
 
 ##How do I send an updated list of subscription preferences to the server?
 Using the `saveSubscriptions()` method the subscription state can be saved on the server.
-`PwAlertsSubscription.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
+`PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
 This will use the `isSubscribed` flag in each of the models in the list.
 _**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
 a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
