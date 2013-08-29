@@ -183,3 +183,11 @@ This should only be used for development and testing, not in production.
 Call the method with the line `PwAlertsModule.validateManifestAlertsSetup(context)`. The passed in context should be the
 application context. If there is an error then an `IllegalStateException` will be thrown with an error message on what
 couldn't be found.
+
+##Troubleshooting
+###Why am I not getting alerts?
+Make sure the SDK is properlly configured:
+
+1. Double check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
+2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location
+3. Check that your Google API keys are properly configured on the MaaS Portal in the Alerts and Notifications section.
