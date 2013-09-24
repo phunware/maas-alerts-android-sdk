@@ -2,7 +2,7 @@
 
 [Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
 
-**v 1.1.2**
+**v 1.1.3**
 Release Note:
 - Now handles push messages without having an associated payload.
 
@@ -122,10 +122,6 @@ public class GCMIntentService extends PwAlertsIntentService {
         
     @Override
      public void onMessageAlerts(Context context, PwAlertExtras extras,JSONObject data) {
-    }
-	
-	@Override
-     public void onMessageAlertsWithoutPayload(Context context, PwAlertExtras extras,JSONObject data) {
     }
 }
 ```
