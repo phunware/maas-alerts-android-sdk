@@ -5,7 +5,7 @@
 **v 1.1.2**
 Release Note:
 - Now handles push messages without having an associated payload.
-________________
+
 ##Overview
 The MaaS Alerts SDK provides push notification functionality.
 Once installed, the SDK will automatically attempt to register for push notifications.
