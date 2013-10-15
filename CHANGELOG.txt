@@ -1,14 +1,4 @@
-#MaaSCore Changelog
-
-##1.2.0 (Wednesday, July 31st, 2013)
- * Updated logs that print when using PwLog. (Available in MaaSCore 1.2.1)
-
-##1.2.0 (Wednesday, July 31st, 2013)
- * Requires MaaSCore 1.2.0
- 
-##1.1.0 (Tuesday, July 16th, 2013)
- * Minor bug fixes
- * Includes support for integration with Google Play Services Location API
+#MaaSAlerts Changelog
 
 ##1.1.2 (Monday, September 23th, 2013)
  * Now handles push messages without associated S3 payload.
