@@ -353,9 +353,6 @@ public class AlertsSample extends FragmentActivity implements OnTabChangeListene
 		mConsoleOutput.appendToConsole(text);
 		flushToConsole();
 
-		// You will need to initialize PRAISEAlertsDataReceiver. What this
-		// does is start a intent service to fetch the alert's payload and send
-		// a positive click to the PRAISE server for analytics.
 		Log.v(TAG, "sending positive click");
 		PwAlertsRegister.sendPositiveClick(getApplicationContext(), pid);
 	}

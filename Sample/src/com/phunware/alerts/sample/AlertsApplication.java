@@ -11,14 +11,13 @@ public class AlertsApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-//		DEV - Another Game With Zombies In It
-		String appId = "28";
-		String accessKey = "4f395b9ece015603a936abe74f5916c13e899101"; 
-		String signatureKey = "09a2d6b7c6b50a5d1fcaedcac3f08198a6847a58";
-		
+//		STAGE - Jenkins LITE
+		String appId = getResources().getString(R.string.app_id);
+		String accessKey = getResources().getString(R.string.access_key);
+		String signatureKey = getResources().getString(R.string.sig_key);
+        String encryptionKey = getResources().getString(R.string.encrypt_key);
+
 		PwLog.setShowLog(true);
-		
-		String encryptionKey = "zxcvbnmasdfghjklqwertyuiop123456";
 		
 		PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance());
 		

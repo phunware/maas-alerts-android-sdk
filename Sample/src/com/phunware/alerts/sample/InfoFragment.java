@@ -48,7 +48,7 @@ public class InfoFragment extends Fragment {
 		((TextView) getView().findViewById(R.id.access_key_value))
 				.setText(accessKey);
 
-		String deviceId = PwCoreSession.getInstance().getDeviceId();
+		String deviceId = PwCoreSession.getInstance().getSessionData().getDeviceId();
 		((TextView) getView().findViewById(R.id.device_id_value))
 				.setText(deviceId);
 		
@@ -94,7 +94,7 @@ public class InfoFragment extends Fragment {
 					+ "\n\nAccess Key:\n"
 					+ PwCoreSession.getInstance().getAccessKey()
 					+ "\n\nDevice Id:\n"
-					+ PwCoreSession.getInstance().getDeviceId()
+					+ PwCoreSession.getInstance().getSessionData().getDeviceId()
 					+ "\n\nDevice GCM Token\n"
 					+ PwAlertsRegister.deviceGCMToken(getActivity());
 			Utils.email(getActivity(), body);

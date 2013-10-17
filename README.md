@@ -2,7 +2,7 @@
 
 [Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
 
-**v 1.1.3**
+**v 1.2.0**
 
 ##Overview
 The MaaS Alerts SDK provides push notification functionality.
@@ -115,11 +115,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 	}
     
     @Override
-    public void onMessageAlertsError(Context context, PwAlertExtras extras, Exception e) {
-    }
-        
-    @Override
-     public void onMessageAlerts(Context context, PwAlertExtras extras,JSONObject data) {
+    public void onMessage(Context context, PwAlertExtras extras) {
     }
 }
 ```
@@ -166,16 +162,24 @@ The `receiver` should be defined inside of the `application` tag.
 
 ###Step 4: Handle Received Alerts
 In the `GCMIntentService` there is a callback to receive a message and a callback to see when an error has occured.
-`onMessageAlerts` will provide a `PwAlertsExtras` object which holds all of the parsed information from
+`onMessage` will provide a `PwAlertsExtras` object which holds all of the parsed information from
 the alert and provides convenient get methods for them. For example:
 
 ``` Java
-public void onMessageAlerts(Context context, PwAlertExtras extras, JSONObject data) {
+public void onMessage(Context context, PwAlertExtras extras) {
     String message = extras.getAlertMessage();
+	/*
+	 * Here is where the alert can be handled and built into a notification or otherwise.
+	 */
 }
 ```
 
-Here is where the alert can be handled and built into a notification or otherwise.
+####Get Extra Data
+If extra data is expected in the alert then get the PID from the alert extras object and call the method `getExtraData(Context, String)`
+```Java
+String pid = extras.getDataPID();
+JSONObject data = getExtraData(context, pid);
+```
 
 ##Verify Manifest
 `PwAlertsModule` has a convenience method to check if the manifest for the Alerts SDK is setup properlly.
