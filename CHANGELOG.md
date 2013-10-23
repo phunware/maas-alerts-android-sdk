@@ -1,6 +1,15 @@
 MaaSAlers Change Log
 ==========
 
+Version 1.2.2 *(2013-10-23)*
+----------------------------
+ * Updating subsriptions to user schema 1.1
+ 
+Version 1.2.1
+----------------------------
+ * Requires Core 1.3.1
+ * Optimizing network calls.
+
 Version 1.2.0 *(2013-10-17)*
 ----------------------------
 Reducing interaction between SDK and GCM when an alert is received.
