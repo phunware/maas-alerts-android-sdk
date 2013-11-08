@@ -2,7 +2,7 @@
 
 [Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
 
-**v 1.2.2**
+**v 1.2.3**
 
 ##Overview
 The MaaS Alerts SDK provides push notification functionality.
