@@ -1,6 +1,9 @@
 MaaSAlers Change Log
 ==========
-
+Version 1.2.3 *(2013-11-08)*
+----------------------------
+ * Updating subsriptions to use schema 1.2
+ 
 Version 1.2.2 *(2013-10-23)*
 ----------------------------
  * Updating subsriptions to user schema 1.1
