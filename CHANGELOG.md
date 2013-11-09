@@ -1,5 +1,9 @@
 MaaSAlers Change Log
 ==========
+Version 1.2.4 *(2013-11-08)*
+----------------------------
+ * Hotfix to temporarily re-register alerts on each application launch.
+
 Version 1.2.3 *(2013-11-08)*
 ----------------------------
  * Updating subsriptions to use schema 1.2
