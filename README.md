@@ -1,4 +1,5 @@
-#Mobile as a Service
+MaaSAlerts Android SDK
+==================
 
 [Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
 
