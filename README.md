@@ -12,27 +12,25 @@ If unsuccessful, the attempt is made again the next time the app starts.
 ##Server Setup
 *For detailed instructions, visit our [GCM Setup documentation](http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm).*
 
-Log into your [Google account's API console](https://code.google.com/apis/console).
-You will need an email account with Google to have access to the Google console. 
-Select "Services" from your console and enable "Google Cloud Messaging for Android". 
-Once GCM is turned on, select "API Access" from the menu and look for the "Api Key" under the section "Key for Android apps". Record the Api key.
+Log into your [Google account's API console](https://code.google.com/apis/console). (You will need an email account with Google to have access to the console.) 
+Select "Services" and enable "Google Cloud Messaging for Android." 
+Once GCM is turned on, select "API Access" from the menu and look for the "API Key" under the section "Key for Android apps." Record the API Key.
 
-Once you have the Api key, you will need the send id.
-To get the sender id,  look on the google console address bar copy the  value of the "project" key.
-i.e https://code.google.com/apis/console/X/X/#project:111111111:access
+Once you have the API Key, you will need the Sender ID.
+To get the Sender ID, view the Google Console address bar and copy the value of the "project" key (i.e. https://code.google.com/apis/console/X/X/#project:111111111:access). 
 
-Once you have both the api key and sender id, log into maas.phunware.com. Select "Alerts & Notifications" from the menu and then select configure. Select your app you created, otherwise create one first. Once you have an app select the desire app and enter the token which is your Api Key and Sender id. Select save and now you have finished configuring your app.
+Once you have both the API Key and Sender ID, log into maas.phunware.com. Select the Alerts & Notifications tab from the menu and then select configure. Select an app you've created, otherwise create one first. Once you have an app, select the desire app and enter the token which is your API Key and Sender ID. Select save and now you have finished configuring your app.
 
 
 ##Prerequisites
-The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google's `gcm.jar`. The GCM jar can be found in the Android SDK directory:
+The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google's `gcm.jar`. The GCM .jar can be found in the Android SDK directory:
 `your-android-sdk\extras\google\gcm\`.
 Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
 ``` Java
 @Override
 public void onCreate() {
     super.onCreate();
-    /* Other Code */
+    /* Other code */
     PwCoreSession.getInstance().installModules(PwAlertsModule.getInstance(), ...);
     /* Other code */
 }
