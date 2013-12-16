@@ -37,12 +37,12 @@ public void onCreate() {
 ```
 
 ##How do I dynamically unregister and register?
-You can manually perform an unregister and register action simply by calling the static methods
+You can manually perform an unregister and register action simply by calling the static methods:
 `PwAlertsRegister.unregister(Context context)` or `PwAlertsRegister.register(Context context)`
 
 ##How do I know when unregister or register operations are finished?
-In your implementation of `GCMIntentService` (See below for implementation details) there are two methods that
-will be called. `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`.
+In your implementation of `GCMIntentService` (see below for implementation details), there are two methods that
+will be called: `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`
 
 `onRegistered` is called when the device has registered successfully or unsuccessfully.
 The first parameter is a flag signifying this status.
@@ -56,23 +56,23 @@ The second parameter will provide an error message or `null` if the operation is
 To get the list of available subscriptions, call the line
 `PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
 This will return an `ArrayList` of `PwSubscription` objects.
-Each object maintains an `id`, a `name`, and an `isSubscribed` flag.
+Each object maintains an `id`, a `name` and an `isSubscribed` flag.
 The server maintains a subscribed state for each subscription, however this information isn’t
 passed back in this call. It is up to the developer to update and persist the saved state of each subscription.
 
 ##How do I send an updated list of subscription preferences to the server?
-Using the `saveSubscriptions()` method the subscription state can be saved on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
+Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
 `PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
 This will use the `isSubscribed` flag in each of the models in the list.
 _**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
 a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
 
 
-##How do I receive Push Notifications?
+##How do I receive push notifications?
 There are a few steps to follow in order to be able to receive and handle push notifications.
 
 ###Step 1: Update Permissions
-Update the `AndroidManifest.xml` with to include the following permissions.
+Update the `AndroidManifest.xml` to include the following permissions.
 These go outside of the `application` tag:
 
 ``` XML
@@ -84,7 +84,7 @@ These go outside of the `application` tag:
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <!--
     Creates a custom permission so only this app can receive its messages.
-    NOTE: the permission *must* be called PACKAGE.permission.C2D_MESSAGE,
+    NOTE: The permission must be called PACKAGE.permission.C2D_MESSAGE,
     where PACKAGE is the application's package name.
 -->
 <permission
@@ -92,7 +92,7 @@ These go outside of the `application` tag:
     android:protectionLevel="signature" />
 
 <uses-permission android:name="com.phunware.alerts.sample.permission.C2D_MESSAGE" />
-<!-- This app has permission to register and receive data message. -->
+<!-- This app has permission to register and receive data messages. -->
 <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 ```
 
@@ -118,7 +118,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 }
 ```
 
-In the manifest the service should be registered with the correct path to the service.
+The service should be registered with the correct path to the service in the manifest.
 The `service` should be defined inside of the `application` tag.
 If` GCMIntentService` is in the package root, then follow the below example:
 ``` XML
@@ -130,8 +130,8 @@ If` GCMIntentService` is in the package root, then follow the below example:
 ```
 
 ###Step 3: Register Receivers
-Register the GCM Receiver in the manifest.
-This will receive intents from GCM services and then forward them through to the `IntentService` defined above.
+Register the GCM receiver in the manifest.
+This will receive intents from GCM services, then forward them through to the `IntentService` defined above.
 Be sure to replace the category tag with your own package name.
 The `receiver` should be defined inside of the `application` tag.
 
@@ -141,7 +141,7 @@ The `receiver` should be defined inside of the `application` tag.
     services and handle them to the custom IntentService.
 
     The com.google.android.c2dm.permission.SEND permission is necessary
-    so only GCM services can send data messages for the app
+    so only GCM services can send data messages for the app.
 -->
 <receiver
     android:name="com.google.android.gcm.GCMBroadcastReceiver"
@@ -150,7 +150,7 @@ The `receiver` should be defined inside of the `application` tag.
 
         <!-- Receives the actual messages. -->
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <!-- Receives the registration id. -->
+        <!-- Receives the Registration ID. -->
         <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
         <!-- Your Package Name Here -->
         <category android:name="com.your.package.name.here" />
@@ -159,8 +159,8 @@ The `receiver` should be defined inside of the `application` tag.
 ```
 
 ###Step 4: Handle Received Alerts
-In the `GCMIntentService` there is a callback to receive a message and a callback to see when an error has occured.
-`onMessage` will provide a `PwAlertsExtras` object which holds all of the parsed information from
+In the `GCMIntentService`, there is a callback to receive a message and a callback to see when an error has occured.
+`onMessage` will provide a `PwAlertsExtras` object, which holds all of the parsed information from
 the alert and provides convenient get methods for them. For example:
 
 ``` Java
@@ -173,17 +173,17 @@ public void onMessage(Context context, PwAlertExtras extras) {
 ```
 
 ####Get Extra Data
-If extra data is expected in the alert then get the PID from the alert extras object and call the method `getExtraData(Context, String)`
+If extra data is expected in the alert, then get the PID from the alert extras object and call the method: `getExtraData(Context, String)`
 ```Java
 String pid = extras.getDataPID();
 JSONObject data = getExtraData(context, pid);
 ```
 
 ##Verify Manifest
-`PwAlertsModule` has a convenience method to check if the manifest for the Alerts SDK is setup properlly.
+`PwAlertsModule` has a convenience method to check if the manifest for the Alerts SDK is set up properlly.
 This should only be used for development and testing, not in production.
-Call the method with the line `PwAlertsModule.validateManifestAlertsSetup(context)`. The passed in context should be the
-application context. If there is an error then an `IllegalStateException` will be thrown with an error message on what
+Call the method with the line `PwAlertsModule.validateManifestAlertsSetup(context)`. The passed-in context should be the
+application context. If there is an error, then an `IllegalStateException` will be thrown with an error message on what
 couldn't be found.
 
 ##Troubleshooting
@@ -191,5 +191,5 @@ couldn't be found.
 Make sure the SDK is properlly configured:
 
 1. Double check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
-2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location
-3. Check that your Google API keys are properly configured on the MaaS Portal in the Alerts and Notifications section.
+2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location.
+3. Check that your Google API keys are properly configured on the MaaS Portal in the Alerts & Notifications tab.
