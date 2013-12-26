@@ -10,7 +10,7 @@ This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit
 Documentation
 ------------
 
-MaaSCore documentation is included in the Documents folder in the repository as both HTML and as a .jar. You can also find the latest documentation here: http://phunware.github.io/maas-alerts-android-sdk/
+MaaS Alerts documentation is included in the Documents folder in the repository as both HTML and as a .jar. You can also find the latest documentation here: http://phunware.github.io/maas-alerts-android-sdk/
 
 
 
@@ -223,4 +223,4 @@ Make sure the SDK is properlly configured:
 
 1. Double check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
 2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location.
-3. Check that your Google API keys are properly configured on the MaaS Portal in the Alerts & Notifications tab.
+3. Check that your Google API keys are properly configured on the MaaS portal in the Alerts & Notifications tab.
