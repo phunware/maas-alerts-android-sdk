@@ -202,6 +202,12 @@ String pid = extras.getDataPID();
 JSONObject data = getExtraData(context, pid);
 ```
 
+#### Analytic Event Trigger
+When an alert reaches the device and is interacted with it is up to the responsibility of the developer to trigger a positive click. This should be called once the alert has been interacted with by a user. This increments the Alerts Opened counter.
+```JAVA
+// Trigger a positive click event for an alert by it's PID.
+PwAlertsRegister.sendPositiveClick(context, pid);
+```
 
 
 Verify Manifest
