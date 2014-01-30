@@ -1,7 +1,7 @@
 MaaS Alerts SDK for Android
 ==================
 
-Version 1.2.4
+Version 1.2.5
 
 This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
 
@@ -196,10 +196,9 @@ public void onMessage(Context context, PwAlertExtras extras) {
 ```
 
 ##### Get Extra Data
-If extra data is expected in the alert, then get the PID from the alert extras object and call the method: `getExtraData(Context, String)`
+If extra data is expected in the alert, then forward the alert extras object to the method: `getExtraData(Context, PwAlertExtras)`
 ```Java
-String pid = extras.getDataPID();
-JSONObject data = getExtraData(context, pid);
+JSONObject data = getExtraData(context, extras);
 ```
 
 #### Analytic Event Trigger

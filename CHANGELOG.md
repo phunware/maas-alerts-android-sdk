@@ -1,16 +1,21 @@
 MaaSAlers Change Log
 ==========
+
+Version 1.2.5 *(2014-01-30)*
+----------------------------
+ * Adding support for custom locations for extra data associated with alerts.
+
 Version 1.2.4 *(2013-11-08)*
 ----------------------------
  * Hotfix to temporarily re-register alerts on each application launch.
-
+ 
 Version 1.2.3 *(2013-11-08)*
 ----------------------------
  * Updating subsriptions to use schema 1.2
- 
+
 Version 1.2.2 *(2013-10-23)*
 ----------------------------
- * Updating subsriptions to user schema 1.1
+ * Updating subsriptions to use schema 1.1
  
 Version 1.2.1
 ----------------------------

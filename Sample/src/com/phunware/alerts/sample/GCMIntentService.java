@@ -37,7 +37,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 //		bundle.putString(Utils.INTENT_ALERT_EXTRA_PID, extras.getDataPID());
         JSONObject data = null;
         try {
-            data = getExtraData(context, extras.getDataPID());
+            data = getExtraData(context, extras);
             try {
                 bundle.putString(Utils.INTENT_ALERT_DATA, data.toString(2));
             } catch (JSONException e) {
