@@ -60,37 +60,6 @@ public void onCreate() {
 Integration
 ------------
 
-### How do I dynamically unregister and register?
-You can manually perform an unregister and register action simply by calling the static methods:
-`PwAlertsRegister.unregister(Context context)` or `PwAlertsRegister.register(Context context)`
-
-### How do I know when unregister or register operations are finished?
-In your implementation of `GCMIntentService` (see below for implementation details), there are two methods that
-will be called: `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`
-
-`onRegistered` is called when the device has registered successfully or unsuccessfully.
-The first parameter is a flag signifying this status.
-The second parameter will provide an error message or `null` if the operation is successful.
-
-`onUnregistered` is called when the device has unregistered successfully or unsuccessfully.
-The first parameter is a flag signifying this status.
-The second parameter will provide an error message or `null` if the operation is successful.
-
-### How do I get a list of subscriptions?
-To get the list of available subscriptions, call the line
-`PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
-This will return an `ArrayList` of `PwSubscription` objects.
-Each object maintains an `id`, a `name` and an `isSubscribed` flag.
-The server maintains a subscribed state for each subscription, however this information isn’t
-passed back in this call. It is up to the developer to update and persist the saved state of each subscription.
-
-### How do I send an updated list of subscription preferences to the server?
-Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
-`PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
-This will use the `isSubscribed` flag in each of the models in the list.
-_**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
-a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
-
 ### How do I receive push notifications?
 There are a few steps to follow in order to be able to receive and handle push notifications.
 
@@ -229,3 +198,34 @@ Make sure the SDK is properlly configured:
 1. Double check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
 2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location.
 3. Check that your Google API keys are properly configured on the MaaS portal in the Alerts & Notifications tab.
+
+### How do I dynamically unregister and register?
+You can manually perform an unregister and register action simply by calling the static methods:
+`PwAlertsRegister.unregister(Context context)` or `PwAlertsRegister.register(Context context)`
+
+### How do I know when unregister or register operations are finished?
+In your implementation of `GCMIntentService` (see below for implementation details), there are two methods that
+will be called: `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`
+
+`onRegistered` is called when the device has registered successfully or unsuccessfully.
+The first parameter is a flag signifying this status.
+The second parameter will provide an error message or `null` if the operation is successful.
+
+`onUnregistered` is called when the device has unregistered successfully or unsuccessfully.
+The first parameter is a flag signifying this status.
+The second parameter will provide an error message or `null` if the operation is successful.
+
+### How do I get a list of subscriptions?
+To get the list of available subscriptions, call the line
+`PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
+This will return an `ArrayList` of `PwSubscription` objects.
+Each object maintains an `id`, a `name` and an `isSubscribed` flag.
+The server maintains a subscribed state for each subscription, however this information isn’t
+passed back in this call. It is up to the developer to update and persist the saved state of each subscription.
+
+### How do I send an updated list of subscription preferences to the server?
+Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
+`PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
+This will use the `isSubscribed` flag in each of the models in the list.
+_**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
+a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
