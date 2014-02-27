@@ -1,6 +1,11 @@
 MaaSAlers Change Log
 ==========
 
+Version 1.2.6 *(2014-02-26)*
+----------------------------
+ * Fixed builds to produce Java 6 compatible binaries using 'sourceCompatibility' and 'targetCompatibility' equal to '1.6'.
+ * Requires MaaSCore v1.3.5
+
 Version 1.2.5 *(2014-01-30)*
 ----------------------------
  * Adding support for custom locations for extra data associated with alerts.
