@@ -165,9 +165,31 @@ public void onMessage(Context context, PwAlertExtras extras) {
 ```
 
 ##### Get Extra Data
-If extra data is expected in the alert, then forward the alert extras object to the method: `getExtraData(Context, PwAlertExtras)`
+If extra data is expected in the alert, then forward the alert extras object to the method when handling the message: `getExtraData(Context, PwAlertExtras)`
 ```Java
-JSONObject data = getExtraData(context, extras);
+
+@Override
+    public void onMessage(Context context, PwAlertExtras extras) {
+
+        // Create a bundle to pass to notification creation
+        final Bundle bundle = new Bundle();
+        // Add ‘alertExtras’ to bundle
+        bundle.putParcelable("alertExtras", extras);
+        
+        try {
+            // Delegate to getExtraData(context, extras)
+            final JSONObject data = getExtraData(context, extras);
+            try {
+                // Process key-value pairs contained in data and add to bundle
+                bundle.putString(Utils.INTENT_ALERT_DATA, data.toString(2));
+            } catch (JSONException e) {
+                bundle.putString(Utils.INTENT_ALERT_DATA, data.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Create a notification using extra data bundle
+    }
 ```
 
 #### Analytic Event Trigger
