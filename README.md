@@ -168,7 +168,7 @@ public void onMessage(Context context, PwAlertExtras extras) {
 If extra data is expected in the alert, then forward the alert extras object to the method when handling the message: `getExtraData(Context, PwAlertExtras)`
 ```Java
 
-@Override
+    @Override
     public void onMessage(Context context, PwAlertExtras extras) {
 
         // Create a bundle to pass to notification creation
