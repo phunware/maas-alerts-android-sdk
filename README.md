@@ -1,6 +1,10 @@
 MaaS Alerts SDK for Android
 ==================
 
+Version 1.2.7
+
+This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
+
 Version 1.2.6
 
 This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
@@ -241,9 +245,9 @@ The second parameter will provide an error message or `null` if the operation is
 To get the list of available subscriptions, call the line
 `PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
 This will return an `ArrayList` of `PwSubscription` objects.
-Each object maintains an `id`, a `name` and an `isSubscribed` flag.
-The server maintains a subscribed state for each subscription, however this information isn’t
-passed back in this call. It is up to the developer to update and persist the saved state of each subscription.
+Each object maintains an `id`, a `name` and an `isSubscribed` flag, and an `ArrayList` of
+children `PwSubscription` objects (referred to as sub-segments).
+The server and the Alerts SDK maintain state for each subscription.
 
 ### How do I send an updated list of subscription preferences to the server?
 Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
