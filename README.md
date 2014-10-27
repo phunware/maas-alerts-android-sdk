@@ -5,6 +5,12 @@ Version 1.2.7
 
 This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
 
+Requirements
+------------
+
+* Android SDK 2.2+ (API level 8) or above
+* Android Target 4.1.1.4
+* Android Support v4 18.0.+
 
 
 Documentation
