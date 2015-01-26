@@ -1,6 +1,10 @@
 MaaSAlers Change Log
 ==========
 
+Version 1.2.8 *(2015-01-26)*
+----------------------------
+ * Change to using the GoogleCloudMessaging class instead of deprecated GCMRegistar class.
+
 Version 1.2.6 *(2014-02-26)*
 ----------------------------
  * Fixed builds to produce Java 6 compatible binaries using 'sourceCompatibility' and 'targetCompatibility' equal to '1.6'.

@@ -1,7 +1,7 @@
 MaaS Alerts SDK for Android
 ==================
 
-Version 1.2.7
+Version 1.2.8
 
 This is Phunware's Android SDK for the Alerts & Notifications module. Visit http://maas.phunware.com/ for more details and to sign up.
 
