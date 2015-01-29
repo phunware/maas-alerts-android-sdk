@@ -48,8 +48,7 @@ Once you have both the API Key and Sender ID, log into maas.phunware.com. Select
 Prerequisites
 -------------
 
-The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google's `gcm.jar`. The GCM .jar can be found in the Android SDK directory:
-`your-android-sdk\extras\google\gcm\`.
+The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google Play Services. 
 Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
 ``` Java
 @Override
