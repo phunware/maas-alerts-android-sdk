@@ -1,4 +1,4 @@
-MaaSAlers Change Log
+MaaSAlerts Change Log
 ==========
 
 Version 1.2.8 *(2015-01-26)*
@@ -20,11 +20,11 @@ Version 1.2.4 *(2013-11-08)*
  
 Version 1.2.3 *(2013-11-08)*
 ----------------------------
- * Updating subsriptions to use schema 1.2
+ * Updating subscriptions to use schema 1.2
 
 Version 1.2.2 *(2013-10-23)*
 ----------------------------
- * Updating subsriptions to use schema 1.1
+ * Updating subscriptions to use schema 1.1
  
 Version 1.2.1
 ----------------------------
