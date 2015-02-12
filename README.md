@@ -1,8 +1,3 @@
-MaaS Alerts
-===========
-
-[Also, see Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
-
 MaaS Alerts SDK for Android
 ==================
 
