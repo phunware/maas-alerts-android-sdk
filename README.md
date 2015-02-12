@@ -1,9 +1,14 @@
+MaaS Alerts
+===========
+
+[Also, see Android MaaS Alerts Documentation](http://phunware.github.io/maas-alerts-android-sdk/)
+
 MaaS Alerts SDK for Android
 ==================
 
 Version 1.2.8
 
-This is Phunware's Android SDK for the Alerts & Notifications module. Visit http://maas.phunware.com/ for more details and to sign up.
+This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
 
 Requirements
 ------------
@@ -25,7 +30,7 @@ Overview
 
 The MaaS Alerts SDK provides push notification functionality.
 Once installed, the SDK will automatically attempt to register for push notifications.
-If unsuccessful, the attempt is made again the next time the app starts. 
+If unsuccessful, the attempt is made again the next time the app starts.
 
 
 
@@ -34,12 +39,12 @@ Server Setup
 
 *For detailed instructions, visit our [GCM Setup documentation](http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm).*
 
-Log into your [Google account's API console](https://code.google.com/apis/console). (You will need an email account with Google to have access to the console.) 
-Select "Services" and enable "Google Cloud Messaging for Android." 
+Log into your [Google account's API console](https://code.google.com/apis/console). (You will need an email account with Google to have access to the console.)
+Select "Services" and enable "Google Cloud Messaging for Android."
 Once GCM is turned on, select "API Access" from the menu and look for the "API Key" under the section "Key for Android apps." Record the API Key.
 
 Once you have the API Key, you will need the Sender ID.
-To get the Sender ID, view the Google Console address bar and copy the value of the "project" key (i.e. https://code.google.com/apis/console/X/X/#project:111111111:access). 
+To get the Sender ID, view the Google Console address bar and copy the value of the "project" key (i.e. https://code.google.com/apis/console/X/X/#project:111111111:access).
 
 Once you have both the API Key and Sender ID, log into maas.phunware.com. Select the Alerts & Notifications tab from the menu and then select configure. Select an app you've created, otherwise create one first. Once you have an app, select the desire app and enter the token which is your API Key and Sender ID. Select save and now you have finished configuring your app.
 
@@ -48,7 +53,7 @@ Once you have both the API Key and Sender ID, log into maas.phunware.com. Select
 Prerequisites
 -------------
 
-The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google Play Services. 
+The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google Play services version 3.1 or higher.
 Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
 ``` Java
 @Override
@@ -102,16 +107,17 @@ Then register the service in the manifest.
 public class GCMIntentService extends PwAlertsIntentService {
 
     @Override
-    public void onRegistered(boolean isSuccessful, String errMessage) {
-	}
-
-	@Override
-	public void onUnregistered(boolean isSuccessful, String errMessage) {
-	}
-    
-    @Override
     public void onMessage(Context context, PwAlertExtras extras) {
     }
+    
+    @Override    
+    public void onDelete(Context context, Intent intent) {
+    }
+
+    @Override
+    public void onError(Context context, Intent intent) {
+    }
+
 }
 ```
 
@@ -141,7 +147,7 @@ The `receiver` should be defined inside of the `application` tag.
     so only GCM services can send data messages for the app.
 -->
 <receiver
-    android:name="com.google.android.gcm.GCMBroadcastReceiver"
+    android:name="com.phunware.alerts.GCMBroadcastReceiver"
     android:permission="com.google.android.c2dm.permission.SEND" >
     <intent-filter>
 
@@ -180,7 +186,7 @@ If extra data is expected in the alert, then forward the alert extras object to 
         final Bundle bundle = new Bundle();
         // Add ‘alertExtras’ to bundle
         bundle.putParcelable("alertExtras", extras);
-        
+
         try {
             // Delegate to getExtraData(context, extras)
             final JSONObject data = getExtraData(context, extras);
@@ -230,18 +236,6 @@ Make sure the SDK is properly configured:
 You can manually perform an unregister and register action simply by calling the static methods:
 `PwAlertsRegister.unregister(Context context)` or `PwAlertsRegister.register(Context context)`
 
-### How do I know when unregister or register operations are finished?
-In your implementation of `GCMIntentService` (see below for implementation details), there are two methods that
-will be called: `onRegistered(isSuccessful, errMessage)` and `onUnregistered(isSuccessful, errMessage)`
-
-`onRegistered` is called when the device has registered successfully or unsuccessfully.
-The first parameter is a flag signifying this status.
-The second parameter will provide an error message or `null` if the operation is successful.
-
-`onUnregistered` is called when the device has unregistered successfully or unsuccessfully.
-The first parameter is a flag signifying this status.
-The second parameter will provide an error message or `null` if the operation is successful.
-
 ### How do I get a list of subscriptions?
 To get the list of available subscriptions, call the line
 `PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
@@ -256,3 +250,9 @@ Use the `saveSubscriptions()` method to save the subscription state on the serve
 This will use the `isSubscribed` flag in each of the models in the list.
 _**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
 a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
+
+### How can I check whether the device is registered?
+Use `PwAlertsRegister.gcmIsRegistered(Context)`, it will return true when the device is registered to GCM, or false if not. Make sure the context your pass into is not null, otherwise it's will return false.
+
+### Can I retreive GCM device token? 
+Yes, you can. Use `PwAlertsRegister.deviceGCMToken(Context)`, it will return GCM device token, or null if not available.
