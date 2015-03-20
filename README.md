@@ -3,7 +3,7 @@ MaaS Alerts SDK for Android
 
 Version 1.2.8
 
-This is Phunware's Android SDK for the Alerts & Notifications MaaS module. Visit http://maas.phunware.com/ for more details and to sign up.
+This is Phunware's Android SDK for the Alerts & Notifications module. Visit http://maas.phunware.com/ for more details and to sign up.
 
 Requirements
 ------------
@@ -32,16 +32,16 @@ If unsuccessful, the attempt is made again the next time the app starts.
 Server Setup
 ------------
 
-*For detailed instructions, visit our [GCM Setup documentation](http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm).*
+*For detailed instructions, see our [GCM setup documentation](http://phunware.github.io/maas-alerts-android-sdk/how-to/Setup%20GCM%20Project.htm).*
 
 Log into your [Google account's API console](https://code.google.com/apis/console). (You will need an email account with Google to have access to the console.)
 Select "Services" and enable "Google Cloud Messaging for Android."
-Once GCM is turned on, select "API Access" from the menu and look for the "API Key" under the section "Key for Android apps." Record the API Key.
+Once GCM is turned on, select "API Access" from the menu and look for the "API Key" under the section "Key for Android apps." Record the API key.
 
-Once you have the API Key, you will need the Sender ID.
-To get the Sender ID, view the Google Console address bar and copy the value of the "project" key (i.e. https://code.google.com/apis/console/X/X/#project:111111111:access).
+Once you have the API key, you will need the sender ID.
+To get the sender ID, view the Google console's address bar and copy the value of the "project" key (i.e. https://code.google.com/apis/console/X/X/#project:111111111:access).
 
-Once you have both the API Key and Sender ID, log into maas.phunware.com. Select the Alerts & Notifications tab from the menu and then select configure. Select an app you've created, otherwise create one first. Once you have an app, select the desire app and enter the token which is your API Key and Sender ID. Select save and now you have finished configuring your app.
+Once you have both the API key and sender ID, log into maas.phunware.com. Select the Alerts & Notifications tab from the menu, then select configure. Select an app you've created, otherwise create one first. Once you have an app, select the desired app and enter the token, which is your API key and sender ID. Select save to finish configuring your app.
 
 
 
@@ -135,7 +135,7 @@ The `receiver` should be defined inside of the `application` tag.
 
 ``` XML
 <!--
-    BroadcastReceiver that will receive intents from GCM
+    BroadcastReceiver will receive intents from GCM
     services and handle them to the custom IntentService.
 
     The com.google.android.c2dm.permission.SEND permission is necessary
@@ -148,9 +148,9 @@ The `receiver` should be defined inside of the `application` tag.
 
         <!-- Receives the actual messages. -->
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <!-- Receives the Registration ID. -->
+        <!-- Receives the registration ID. -->
         <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-        <!-- Your Package Name Here -->
+        <!-- [Your Package Name Here] -->
         <category android:name="com.your.package.name.here" />
     </intent-filter>
 </receiver>
@@ -159,13 +159,13 @@ The `receiver` should be defined inside of the `application` tag.
 #### Step 4: Handle Received Alerts
 In the `GCMIntentService`, there is a callback to receive a message and a callback to see when an error has occured.
 `onMessage` will provide a `PwAlertsExtras` object, which holds all of the parsed information from
-the alert and provides convenient get methods for them. For example:
+the alert and provides convenient GET methods for them. For example:
 
 ``` Java
 public void onMessage(Context context, PwAlertExtras extras) {
     String message = extras.getAlertMessage();
 	/*
-	 * Here is where the alert can be handled and built into a notification or otherwise.
+	 * Here is where the alert can be handled and built into a notification (or otherwise).
 	 */
 }
 ```
@@ -177,16 +177,16 @@ If extra data is expected in the alert, then forward the alert extras object to 
     @Override
     public void onMessage(Context context, PwAlertExtras extras) {
 
-        // Create a bundle to pass to notification creation
+        // Create a bundle to pass to notification creation.
         final Bundle bundle = new Bundle();
-        // Add ‘alertExtras’ to bundle
+        // Add ‘alertExtras’ to the bundle.
         bundle.putParcelable("alertExtras", extras);
 
         try {
-            // Delegate to getExtraData(context, extras)
+            // Delegate to getExtraData(context, extras).
             final JSONObject data = getExtraData(context, extras);
             try {
-                // Process key-value pairs contained in data and add to bundle
+                // Process key/value pairs contained in the data and add them to the bundle. 
                 bundle.putString(Utils.INTENT_ALERT_DATA, data.toString(2));
             } catch (JSONException e) {
                 bundle.putString(Utils.INTENT_ALERT_DATA, data.toString());
@@ -194,14 +194,14 @@ If extra data is expected in the alert, then forward the alert extras object to 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Create a notification using extra data bundle
+        // Create a notification using the extra data bundle.
     }
 ```
 
 #### Analytic Event Trigger
 When an alert reaches the device and is interacted with it is up to the responsibility of the developer to trigger a positive click. This should be called once the alert has been interacted with by a user. This increments the Alerts Opened counter.
 ```JAVA
-// Trigger a positive click event for an alert by it's PID.
+// Trigger a positive click event for an alert by its PID.
 PwAlertsRegister.sendPositiveClick(context, pid);
 ```
 
@@ -212,7 +212,7 @@ Verify Manifest
 `PwAlertsModule` has a convenience method to check if the manifest for the Alerts SDK is set up properly.
 This should only be used for development and testing, not in production.
 Call the method with the line `PwAlertsModule.validateManifestAlertsSetup(context)`. The passed-in context should be the
-application context. If there is an error, then an `IllegalStateException` will be thrown with an error message on what
+application context. If there is an error, then an `IllegalStateException` will be thrown with an error message regarding what
 couldn't be found.
 
 
@@ -223,7 +223,7 @@ Troubleshooting
 ### Why am I not getting alerts?
 Make sure the SDK is properly configured:
 
-1. Double check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
+1. Double-check that your manifest is correct and no errors are thrown when running `PwAlertsModule.validateManifestAlertsSetup(context)`.
 2. Make sure that the `GCMIntentService` is in your root package. See [this post](http://stackoverflow.com/questions/16951216/gcmbaseintentservice-callback-only-in-root-package/16951296?noredirect=1#16951296) to see how to move the service to another location.
 3. Check that your Google API keys are properly configured on the MaaS portal in the Alerts & Notifications tab.
 
@@ -235,7 +235,7 @@ You can manually perform an unregister and register action simply by calling the
 To get the list of available subscriptions, call the line
 `PwAlertsSubscriptions.getSubscriptionGroups(Context context)`.
 This will return an `ArrayList` of `PwSubscription` objects.
-Each object maintains an `id`, a `name` and an `isSubscribed` flag, and an `ArrayList` of
+Each object maintains an `id`, a `name`, an `isSubscribed` flag and an `ArrayList` of
 children `PwSubscription` objects (referred to as sub-segments).
 The server and the Alerts SDK maintain state for each subscription.
 
@@ -243,11 +243,11 @@ The server and the Alerts SDK maintain state for each subscription.
 Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
 `PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
 This will use the `isSubscribed` flag in each of the models in the list.
-_**When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
-a call is made to the back end in order to reset all the subscriptions to an unsubscribed state.**_
+**NOTE**: When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
+a call is made to the backend in order to reset all the subscriptions to an unsubscribed state.**_
 
 ### How can I check whether the device is registered?
-Use `PwAlertsRegister.gcmIsRegistered(Context)`, it will return true when the device is registered to GCM, or false if not. Make sure the context your pass into is not null, otherwise it's will return false.
+Use `PwAlertsRegister.gcmIsRegistered(Context)`. It will return true when the device is registered to GCM, false if not. Make sure the context you pass is not null, otherwise false will be returned.
 
-### Can I retreive GCM device token? 
-Yes, you can. Use `PwAlertsRegister.deviceGCMToken(Context)`, it will return GCM device token, or null if not available.
+### Can I retreive the GCM device token? 
+Yes, you can. Use `PwAlertsRegister.deviceGCMToken(Context)`. It will return GCM device token or null if one isn't available.
