@@ -96,7 +96,7 @@ These go outside of the `application` tag:
 #### Step 2: Register Services
 An `IntentService` runs to handle received messages.
 Create a class called `GCMIntentService` that extends `PwAlertsIntentService`.
-Then register the service in the manifest.
+Then, register the service in the manifest.
 
 ``` Java
 public class GCMIntentService extends PwAlertsIntentService {
@@ -118,7 +118,7 @@ public class GCMIntentService extends PwAlertsIntentService {
 
 The service should be registered with the correct path to the service in the manifest.
 The `service` should be defined inside of the `application` tag.
-If` GCMIntentService` is in the package root, then follow the below example:
+If` GCMIntentService` is in the package root, follow the below example:
 ``` XML
 <!--
     Application-specific subclass of PwAlertsIntentService that will
@@ -157,7 +157,7 @@ The `receiver` should be defined inside of the `application` tag.
 ```
 
 #### Step 4: Handle Received Alerts
-In the `GCMIntentService`, there is a callback to receive a message and a callback to see when an error has occured.
+In the `GCMIntentService`, there is a callback to receive a message and a callback to see when an error has occurred.
 `onMessage` will provide a `PwAlertsExtras` object, which holds all of the parsed information from
 the alert and provides convenient GET methods for them. For example:
 
@@ -240,7 +240,7 @@ children `PwSubscription` objects (referred to as sub-segments).
 The server and the Alerts SDK maintain state for each subscription.
 
 ### How do I send an updated list of subscription preferences to the server?
-Use the `saveSubscriptions()` method to save the subscription state on the server. _**This method should be called asynchronously, or outside of the main UI thread.**_
+Use the `saveSubscriptions()` method to save the subscription state on the server. **This method should be called asynchronously, or outside of the main UI thread.**
 `PwAlertsSubscriptions.saveSubscriptions(Context context, List<PwSubscription> subscriptions)`.
 This will use the `isSubscribed` flag in each of the models in the list.
 **NOTE**: When the Alerts SDK is installed for the first time, or when it runs on the app’s first start,
@@ -249,5 +249,5 @@ a call is made to the backend in order to reset all the subscriptions to an unsu
 ### How can I check whether the device is registered?
 Use `PwAlertsRegister.gcmIsRegistered(Context)`. It will return true when the device is registered to GCM, false if not. Make sure the context you pass is not null, otherwise false will be returned.
 
-### Can I retreive the GCM device token? 
+### Can I retrieve the GCM device token? 
 Yes, you can. Use `PwAlertsRegister.deviceGCMToken(Context)`. It will return GCM device token or null if one isn't available.
