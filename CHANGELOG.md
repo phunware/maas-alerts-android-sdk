@@ -1,6 +1,10 @@
 MaaSAlerts Change Log
 ==========
 
+Version 1.2.9 *(2015-09-30)*
+----------------------------
+ * Change phunware.com endpoints to HTTPS.
+ 
 Version 1.2.8 *(2015-01-26)*
 ----------------------------
  * Change to using the GoogleCloudMessaging class instead of deprecated GCMRegistar class.
