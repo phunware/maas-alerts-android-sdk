@@ -4,6 +4,7 @@ MaaSAlerts Change Log
 Version 1.2.9 *(2015-09-30)*
 ----------------------------
  * Change phunware.com endpoints to HTTPS.
+ * Rename the lib name from MaaSAlertes.jar to PWAlerts.jar.
  
 Version 1.2.8 *(2015-01-26)*
 ----------------------------
