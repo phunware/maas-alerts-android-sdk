@@ -28,6 +28,16 @@ public class GCMIntentService extends PwAlertsIntentService {
     private static final String TAG = "GCMIntentService";
 
     @Override
+    public void onDelete(Context context, Intent intent) {
+
+    }
+
+    @Override
+    public void onError(Context context, Intent intent) {
+
+    }
+
+    @Override
     public void onMessage(Context context, PwAlertExtras extras) {
         Log.v(TAG, "in onMessageAlerts");
         Log.i(TAG, "Extras = " + extras.toString());
@@ -85,7 +95,7 @@ public class GCMIntentService extends PwAlertsIntentService {
         notificationManager.notify((int) when, notification);
     }
 
-    @Override
+
     public void onRegistered(boolean isSuccessful, String errMessage) {
         Log.v(TAG, "in onRegistered: success " + isSuccessful);
         if (!isSuccessful)
@@ -94,7 +104,7 @@ public class GCMIntentService extends PwAlertsIntentService {
     }
 
 
-    @Override
+
     public void onUnregistered(boolean isSuccessful, String errMessage) {
         Log.v(TAG, "in onUnregistered: success " + isSuccessful);
         if (!isSuccessful)

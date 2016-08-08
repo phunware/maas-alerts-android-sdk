@@ -1,29 +1,27 @@
 MaaS Alerts SDK for Android
 ==================
 
-Version 1.2.9
+Version 1.3.0
 
 This is Phunware's Android SDK for the Alerts & Notifications module. Visit http://maas.phunware.com/ for more details and to sign up.
 
 Requirements
 ------------
 
-* Android SDK 2.2+ (API level 8) or above
-* Android Target 4.4.2
-* Android Support v4 18.0.+
+* Android SDK 4.0.3+ (API level 15) or above
 
 
 Documentation
 ------------
 
-MaaS Alerts documentation is included in the Documents folder in the repository as both HTML and as a .jar. You can also find the latest documentation here: http://phunware.github.io/maas-alerts-android-sdk/
+Phunware Alerts documentation is included both in the Documents folder in the repository as HTML and via maven. You can also find the latest documentation here: http://phunware.github.io/maas-alerts-android-sdk/
 
 
 
 Overview
 ---------
 
-The MaaS Alerts SDK provides push notification functionality.
+The Phunware Alerts SDK provides push notification functionality.
 Once installed, the SDK will automatically attempt to register for push notifications.
 If unsuccessful, the attempt is made again the next time the app starts.
 
@@ -48,7 +46,29 @@ Once you have both the API key and sender ID, log into maas.phunware.com. Select
 Prerequisites
 -------------
 
-The MaaS Alerts SDK requires the latest `MaaS Core SDK` and Google Play services version 3.1 or higher.
+The Phunware Alerts SDK automatically imports the latest `Core SDK` (3.0.0) and Google Play Services 9.4.0
+
+To import the library, add the following to your `repositories` tag in your top level `build.gradle` file.
+
+ ```XML
+ projects {
+   repositories {
+     ...
+     maven {
+         url "https://nexus.phunware.com/content/groups/public/"
+     }
+     ...
+   }
+ }
+ ```
+
+
+Import the Phunware Analytics library by adding the following to your app's `build.gradle` file:
+```
+compile 'com.phunware.alerts:alerts:1.3.0'
+```
+
+
 Be sure to install the module in the `Application` `onCreate` method before registering keys. For example:
 ``` Java
 @Override
@@ -104,7 +124,7 @@ public class GCMIntentService extends PwAlertsIntentService {
     @Override
     public void onMessage(Context context, PwAlertExtras extras) {
     }
-    
+
     @Override    
     public void onDelete(Context context, Intent intent) {
     }
@@ -186,7 +206,7 @@ If extra data is expected in the alert, then forward the alert extras object to 
             // Delegate to getExtraData(context, extras).
             final JSONObject data = getExtraData(context, extras);
             try {
-                // Process key/value pairs contained in the data and add them to the bundle. 
+                // Process key/value pairs contained in the data and add them to the bundle.
                 bundle.putString(Utils.INTENT_ALERT_DATA, data.toString(2));
             } catch (JSONException e) {
                 bundle.putString(Utils.INTENT_ALERT_DATA, data.toString());
@@ -249,5 +269,5 @@ a call is made to the backend in order to reset all the subscriptions to an unsu
 ### How can I check whether the device is registered?
 Use `PwAlertsRegister.gcmIsRegistered(Context)`. It will return true when the device is registered to GCM, false if not. Make sure the context you pass is not null, otherwise false will be returned.
 
-### Can I retrieve the GCM device token? 
+### Can I retrieve the GCM device token?
 Yes, you can. Use `PwAlertsRegister.deviceGCMToken(Context)`. It will return GCM device token or null if one isn't available.

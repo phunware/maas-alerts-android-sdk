@@ -14,7 +14,7 @@ public class AlertsApplication extends Application {
 //		STAGE - Jenkins LITE
 		String appId = getResources().getString(R.string.app_id);
 		String accessKey = getResources().getString(R.string.access_key);
-		String signatureKey = getResources().getString(R.string.sig_key);
+		String signatureKey = getResources().getString(R.string.signature_key);
         String encryptionKey = getResources().getString(R.string.encrypt_key);
 
 		PwLog.setShowLog(true);

@@ -174,8 +174,7 @@ public class SubscriptionsFragment extends ListFragment {
 							PwLog.d("Phun_Alerts",
 									"OnCheckedChanged: Position=" + position
 											+ " isChecked=" + isChecked);
-							mAllSubscriptions.get(position).setSubscribed(
-									isChecked);
+							mAllSubscriptions.get(position).setIsSubscribed(isChecked);
 						}
 					});
 			holder.switchView.setChecked(getItem(position).isSubscribed());
@@ -286,7 +285,7 @@ public class SubscriptionsFragment extends ListFragment {
 		SharedPreferences sp = PreferenceManager
 				.getDefaultSharedPreferences(getActivity());
 		for (PwSubscription s : mAllSubscriptions) {
-			s.setSubscribed(sp.getBoolean(SP_SUBSCRIPTION_PREFIX + s.getId(),
+			s.setIsSubscribed(sp.getBoolean(SP_SUBSCRIPTION_PREFIX + s.getId(),
 					false));
 			Log.v(TAG, "updating from preference: " + SP_SUBSCRIPTION_PREFIX
 					+ s.getId() + " - " + s.isSubscribed());

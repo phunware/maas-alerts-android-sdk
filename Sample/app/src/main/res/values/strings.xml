@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_id">572</string>
+    <string name="access_key">9c8984466aceaa9e15cdcda4659eec176b38f9ab</string>
+    <string name="signature_key">232ec0b5bcb2c72fcf7aecd08beed1d75f114c3e</string>
+    <string name="encrypt_key"></string>
+
     <string name="app_name">AlertsSample</string>
     <string name="action_settings">Settings</string>
     
