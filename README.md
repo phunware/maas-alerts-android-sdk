@@ -1,7 +1,7 @@
 MaaS Alerts SDK for Android
 ==================
 
-Version 1.3.0
+Version 1.3.1
 
 This is Phunware's Android SDK for the Alerts & Notifications module. Visit http://maas.phunware.com/ for more details and to sign up.
 
@@ -65,7 +65,7 @@ To import the library, add the following to your `repositories` tag in your top 
 
 Import the Phunware Analytics library by adding the following to your app's `build.gradle` file:
 ```
-compile 'com.phunware.alerts:alerts:1.3.0'
+compile 'com.phunware.alerts:alerts:1.3.1'
 ```
 
 

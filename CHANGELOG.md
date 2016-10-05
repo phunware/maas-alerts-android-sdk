@@ -1,6 +1,11 @@
 MaaSAlerts Change Log
 ==========
 
+Version 1.3.1 *(2016-10-05)*
+----------------------------
+ * Update Google Play Service to 9.6.1
+ * Updated to Core 3.0.2
+
 Version 1.3.0 *(2016-08-01)*
 ----------------------------
  * Build script enhancements
