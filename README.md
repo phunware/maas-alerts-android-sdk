@@ -65,7 +65,7 @@ To import the library, add the following to your `repositories` tag in your top 
 
 Import the Phunware Analytics library by adding the following to your app's `build.gradle` file:
 ```
-compile 'com.phunware.alerts:alerts:1.3.1'
+compile 'com.phunware.alerts:alerts:1.3.2'
 ```
 
 
