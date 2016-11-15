@@ -1,6 +1,10 @@
 MaaSAlerts Change Log
 ==========
 
+Version 1.3.2 *(2016-11-15)*
+----------------------------
+ * Fix for PROD alerts
+
 Version 1.3.1 *(2016-10-05)*
 ----------------------------
  * Update Google Play Service to 9.6.1
